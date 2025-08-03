@@ -1,0 +1,22 @@
+{
+  "name": "mealz-front",
+  "version": "1.0.0",
+  "description": "front-end project of mealz",
+  "main": "index.html",
+  "scripts": {
+    "dev":"index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mealz-open/mealz-front.git"
+  },
+  "keywords": [
+    "keywords"
+  ],
+  "author": "chemilk02",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mealz-open/mealz-front/issues"
+  },
+  "homepage": "https://github.com/Mealz-open/mealz-front#readme"
+}

@@ -10,6 +10,8 @@ import Search from './page/search.js';
 import Like from './page/like.js';
 import Profile from './page/profile.js';
 import Login from './page/login.js';
+import SignUp from './page/signup.js';
+import SignIn from './page/signin.js';
 
 function App() {
 
@@ -21,18 +23,32 @@ function App() {
         <Route path="/search" element={<TOPLocation />} />
       </Routes>
       
-      <div class="main-contents"><Routes>
+      <div class="main-contents">
+      <Routes>
 
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/like" element={<Like />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
 
-      </Routes></div>
+      </Routes>
+      </div>
 
-      <GNB />
-      <PrivateRoute />
+      <Routes>
+        <Route path="/" element={<GNB />} />
+        <Route path="/login" element={''} />
+        <Route path="/signup" element={''} />
+        <Route path="/signin" element={''} />
+      </Routes>
+
+      <Routes>
+        <Route path="/profile" element={<PrivateRoute />} />
+        <Route path="/signup" element={''} />
+        <Route path="/signin" element={''} />
+      </Routes>
     </Router>
     </>
   );

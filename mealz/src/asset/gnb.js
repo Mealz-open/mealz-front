@@ -11,7 +11,7 @@ function GNB() {
 
   return (
     <div>
-      <ul id="gnb-mobile" style={{display: pathname === '/login' ? 'none' : 'flex'}}>
+      <ul id="gnb-mobile">
         <li>
           <Link to="/" className={`btn-gnb ${pathname === '/' ? 'active' : ''}`} id="btn-home">
             <HomeIcon className="icon-gnb" />

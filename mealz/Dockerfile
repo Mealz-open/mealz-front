@@ -1,17 +1,20 @@
-# 빌드 단계
-FROM node:20.15.0 AS builder
+# Step 1: Build the React app
+FROM node:18-alpine AS build
+
 WORKDIR /app
-COPY package.json package-lock.json ./
+
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
-COPY . .
+
+COPY . ./
 RUN npm run build
 
-# 실행 단계
-FROM node:20.15.0-alpine
-WORKDIR /app
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/node_modules ./node_modules
-EXPOSE 3000
-CMD ["npm", "start"]
+# Step 2: Serve the built app with an NGINX server
+FROM nginx:alpine
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

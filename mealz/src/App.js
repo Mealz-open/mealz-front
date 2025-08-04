@@ -1,18 +1,39 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PrivateRoute from './asset/check-login.js';
+
 import './App.css';
-import TOP from './asset/top.js';
+import TOPLocation from './asset/top-location.js';
 import GNB from './asset/gnb.js';
-import Contents from './Contents.js';
+
+import Home from './page/home.js';
+import Search from './page/search.js';
+import Like from './page/like.js';
+import Profile from './page/profile.js';
+import Login from './page/login.js';
 
 function App() {
+
   return (
     <>
-      <TOP />
+    <Router>
+      <Routes>
+        <Route path="/" element={<TOPLocation />} />
+        <Route path="/search" element={<TOPLocation />} />
+      </Routes>
+      
+      <div class="main-contents"><Routes>
 
-      <div class="main-contents">
-        <Contents />
-      </div>
+        <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/like" element={<Like />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
+
+      </Routes></div>
 
       <GNB />
+      <PrivateRoute />
+    </Router>
     </>
   );
 }

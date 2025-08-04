@@ -1,0 +1,344 @@
+@charset "utf-8";
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+/*초기 설정*/
+* {/*기본적으로 html 내 모든 카테고리의 마진과 패딩을 제거*/
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  color: var(--color-text);
+}
+
+body {
+  width: 403px; height: 854px;
+  margin: calc((100dvh - 854px)/2) calc((100% - 393px)/2);
+  background-color: var(--color-bgb);
+  border: solid 5px #000; border-radius: 16px;
+  display: flex; flex-flow: column nowrap; justify-content: flex-start; align-items: center;
+  overflow-y: overlay;
+}
+
+#root {
+  width: 393px !important; height: 844px !important;
+  padding: 54px 0 0 0;
+  display: flex; flex-flow: column nowrap; justify-content: flex-start; align-items: center; gap: 35px;
+  position: absolute;
+  overflow: hidden;
+}
+
+ul, ol {list-style: none;} /*링크의 밑줄 제거*/
+
+a {color: inherit; text-decoration: none; cursor: pointer;} /*링크의 밑줄, 색상 제거*/
+
+button,select {background-color: transparent; border: none;} /*버튼, 셀렉트 테두리 제거*/
+
+div,span,a,img,canvas {max-width: 100% !important;} /*화면 밖으로 객체가 나가는 현상 방지*/
+
+hr {/*구분선 디자인*/
+  width: 98%; height: 1px;
+  margin: 0 1%;
+  background-color: var(--color-monotone-1);
+  opacity: 20%;
+}
+
+/*variable*/
+:root {
+  /*color*/
+  --color-primary-1: #f9682f;
+  --color-primary-2: #febf26;
+  --color-monotone-1: #ffffff;
+  --color-monotone-2: #e4e4e4;
+  --color-monotone-3: #b9b9b9;
+  --color-monotone-4: #747474;
+  --color-monotone-5: #343434;
+  --color-monotone-6: #000000;
+  --color-success: #19d99d;
+  --color-warning: #fccf30;
+  --color-failure: #e74c3c;
+  --color-bg: #ffffff;
+  --color-text: #000000;
+
+  /*breakpoint*/
+  --small: 480px;
+  --medium: 768px;
+  --large: 1280px;
+
+  /*fontsize*/
+  --h1: 20px;
+  --h2: 18px;
+  --h3: 16px;
+  --h4: 14px;
+  --h5: 12px;
+  --h6: 10px;
+}
+
+/*정렬*/
+#group-align-std, .group-align-std {width: 100%; display: flex; justify-content: space-between !important; align-items: center; gap: 8px;}
+.group-align-left {width: 100%; display: flex; justify-content: flex-start !important; align-items: center; gap: 8px;}
+.group-align-center {width: 100%; display: flex; justify-content: center !important; align-items: center; gap: 8px;}
+.group-align-right {width: 100%; display: flex; justify-content: flex-end !important; align-items: center; gap: 8px;}
+
+/*기본 폰트 설정*/
+html {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  font-size: 12pt;
+  line-height: 1.0;
+}
+
+h1 {font-weight: 600; font-size: 20px; max-width: 100%;}
+h2 {font-weight: 600; font-size: 18px; max-width: 100%;}
+h3 {font-weight: 500; font-size: 16px; max-width: 100%;}
+h4 {font-weight: 500; font-size: 14px; max-width: 100%;}
+h5 {font-weight: 400; font-size: 12px; max-width: 100%;}
+h6 {font-weight: 400; font-size: 10px; max-width: 100%;}
+figure {line-height: 1.6; margin-bottom: 8px;}
+
+/*네비게이션*/
+#gnb-mobile {
+  width: 393px; height: 105px;
+  padding: 18px 20px;
+
+  background: var(--color-bg);
+  box-shadow: 0 -4px 7.2px 0 rgba(0, 0, 0, 0.10);
+  border-radius: 0 0 16px 16px;
+
+  position: absolute; bottom: 0px; left: 0;
+  display: flex; justify-content: space-evenly; align-items: flex-start; gap: 50px;
+
+  z-index: 3;
+}
+
+.btn-gnb {
+  width: 100%; height: 45px;
+  display: flex; flex-flow: column nowrap; justify-content: space-between; align-items: center;
+}
+
+.btn-gnb *{
+  font-size: 10px; font-weight: 400; font-style: normal;
+  line-height: normal;
+  color: var(--color-monotone-3);
+}
+
+.icon-gnb *{
+  width: min-content; height: 25px;
+}
+
+/*TOP 영역*/
+.top {
+  width: 100%; height: 44px;
+  padding: 0 20px 20px 20px;
+  background-color: var(--color-bg);
+  position: absolute;
+  display: flex; flex-flow: row nowrap; justify-content: space-between; align-items: center;
+}
+
+/*article*/
+.article {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.article-title {
+  width: 100%; height: 24px;
+  margin: 0 0 15px 0;
+  line-height: 24px;
+  display: flex; justify-content: space-between;
+}
+.main-contents {
+  width: 393px; height: 844px;
+  padding: 59px 0 105px 0;
+  display: flex; flex-flow: column nowrap; justify-content: flex-start; align-items: center; gap: 35px;
+  overflow: auto;
+}
+
+/*버튼 설정 - 그룹*/
+.btn-group{
+  max-width: 100%;
+  display: flex; justify-content: flex-start; align-items: center; flex-shrink: 0; gap: 6px;
+  overflow: scroll;
+  white-space: nowrap;
+}
+
+.btn-grid {
+  width: 100%; height: auto;
+  display: flex; flex-flow: row wrap; justify-content: flex-start; align-items: flex-start; gap: 6px 10px; 
+}
+
+/*버튼 설정 - 형태*/
+.btn-sqr {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: flex; justify-content: center; align-items: center; flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.btn-rtg {
+  min-width: 80px; height: 25px;
+  padding: 0 12px;
+  border-radius: 12px;
+  font-weight: 500;
+  display: flex; justify-content: center; align-items: center; flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.btn-fill {
+  width: 100%; height: 40px;
+  padding: 0 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  display:flex; justify-content: space-between; align-items: center;
+  cursor: pointer;
+}
+
+/*버튼 설정 - 색상*/
+.btn-line {
+  border: 1px solid #B9B9B9; border-radius: 5px; box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.30);
+  background: #FFF;
+}
+
+/*아이콘*/
+.icon-small {
+  width: min-content;
+  height: 14px;
+}
+.icon-medium {
+  width: min-content;
+  height: 16px;
+}
+.icon-large {
+  width: min-content;
+  height: 21px;
+}
+
+/*토글*/
+
+
+/*box*/
+.box-row{
+  display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: flex-start;
+}
+
+.box-col{
+  display: flex; flex-flow: column nowrap; justify-content: flex-start; align-items: flex-start;
+}
+
+/*카드*/
+.card-row,
+.card-col{
+  width: 100%;
+  padding: 8px 20px;
+  background-color: var(--color-bg);
+  border-radius: 5px; border: 1px solid var(--color-monotone-3);
+  display: flex; justify-content: flex-start; align-items: flex-start;
+}
+
+.card-col{flex-direction: column;}
+
+/*slide*/
+.slide-container {
+  display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: center; gap: 10px;
+  overflow: scroll;
+}
+
+.slide-img {
+  width: 100px; height: 103px;
+  background-color: var(--color-monotone-2); 
+  border-radius: 5px 5px 0 0;
+}
+
+.slide-time {
+  width: 100px; height: 27px;
+  background-color: var(--color-primary-1);
+  border-radius: 0 0 5px 5px;
+}
+
+.slide-info {
+  width: 100px; height: 40px;
+  padding: 10px;
+  display: flex; flex-flow: column nowrap; justify-content: center; align-items: flex-start; gap: 5px;
+  border: 1px solid var(--color-monotone-3); border-radius: 5px; box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.20);
+}
+
+/*map*/
+.map-container {
+  width: 353px; height: 160px;
+  background-color: var(--color-monotone-2);
+}
+
+/*셀렉터*/
+
+
+/*검색창*/
+.search-bar-container {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.search-bar {
+  width: 100%; height: 35px;
+  padding: 3px 10px;
+  border: 1px solid var(--color-monotone-3); border-radius: 5px; box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.30);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.search-bar>input {width: 100%; height: 100%; border: none;}
+.search-bar>input::placeholder {color: var(--color-monotone-3);}
+
+.search-bar>*:nth-child(1) {color: var(--color-monotone-5);}
+.search-bar>*:nth-child(2) * {color: var(--color-primary-1);}
+
+/*입력창*/
+
+
+/*캐러셀*/
+.carousel {
+  width: 100%; height: 171px;
+  background-color: var(--color-monotone-2);
+  display: flex; justify-content: center; align-items: center; flex: 0 0 auto;
+}
+/*푸터*/
+
+/*Pagination*/
+
+
+/*login-page*/
+
+
+/*profile-page*/
+
+
+/*외부 시스템*/
+
+/*소셜 아이덴티티*/
+.social-logo-img {height: 16px;}
+#kakao {
+    background-color: #fee500;
+    color: #191919;
+}
+
+#naver {
+    background-color: #03c75a;
+    color: #fff;
+}
+
+
+/*스크롤바 디자인*/
+/*
+*::-webkit-scrollbar {width: 5px; height: 4px;}
+*/
+
+*::-webkit-scrollbar {display: none;}
+
+*::-webkit-scrollbar-thumb {
+    min-width: 50px; min-height: 50px;
+    margin: 80px 0 0 0;
+
+    background-color: var(--color-primary);
+    border: 2.5px solid transparent; border-radius: 2.5px; outline: none;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: transparent;
+    box-shadow: none;
+}

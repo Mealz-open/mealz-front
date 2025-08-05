@@ -7,7 +7,7 @@ import Cert from '../asset/certified.js';
 function Home() {
     return(
         <>
-            <SearchBar />
+            <div class="article"><SearchBar /></div>
             <div class="carousel">
             공지사항 / 이벤트
             </div>

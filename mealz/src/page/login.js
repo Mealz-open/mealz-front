@@ -6,7 +6,7 @@ function Login() {
     return(
         <div className="article" style={{ gap: 405 }}>
         <div className="box-col gap20">
-            <h4>시작하기</h4>
+            <h4 style={{ lineHeight: '18px' }}>시작하기</h4>
             <h1 className="var-primary">음식 나눔으로 행복을 나누세요</h1>
             <h3 style={{ lineHeight: '24px' }}>
                 152번의 나눔으로 채운 오늘,<br />

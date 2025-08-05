@@ -6,10 +6,10 @@ import { ReactComponent as Naver } from '../asset/image/naver_symbol.svg';
 
 function SignIn() {
     return(
-        <div className="article" style={{ gap: 405 }}>
+        <div className="article" style={{ gap: 393 }}>
         <div className="box-col gap20">
-            <h4>로그인</h4>
-            <h1 className="var-primary" style={{ lineHeight: '30px' }}>돌아오신 것을 환형합니다</h1>
+            <h4 style={{ lineHeight: '18px' }}>로그인</h4>
+            <h1 className="var-primary" style={{ lineHeight: '30px' }}>돌아오신 것을<br />환형합니다</h1>
             <h3 style={{ lineHeight: '24px' }}>
                 기존에 가입한 계정으로 로그인해주세요
             </h3>

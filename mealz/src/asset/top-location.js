@@ -1,6 +1,6 @@
 import { ReactComponent as AlertIcon } from './icon/icon-alert.svg';
 
-function TOP() {
+function TOPLocation() {
     return(
         <div class="top">
             <h1>서울시 종로구</h1>
@@ -14,4 +14,4 @@ function TOP() {
     )
 }
 
-export default TOP;
+export default TOPLocation;

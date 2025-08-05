@@ -1,9 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+
 function Today() {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/today');
+  }
   return (
       <div class="article">
         <div class="article-title">
             <h3>오늘의 나눔</h3>
-            <h5>더보기</h5>
+            <button onClick={handleClick}><h5>더보기</h5></button>
         </div>
         <div class="slide-container">
           <div class="box-col">

@@ -6,9 +6,9 @@ import { ReactComponent as Naver } from '../asset/image/naver_symbol.svg';
 
 function SignUp() {
     return(
-        <div className="article" style={{ gap: 405 }}>
+        <div className="article" style={{ gap: 345 }}>
         <div className="box-col gap20">
-            <h4>회원가입하기</h4>
+            <h4 style={{ lineHeight: '18px' }}>회원가입하기</h4>
             <h1 className="var-primary" style={{ lineHeight: '30px' }}>음식 나눔으로 지속가능한<br/>내일을 만들어가요</h1>
             <h3 style={{ lineHeight: '24px' }}>
                 mealz를 통해 음식을<br/>받거나 기부하려면<br/>회원가입이 필요해요

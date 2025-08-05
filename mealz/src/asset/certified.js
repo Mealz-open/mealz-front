@@ -14,7 +14,7 @@ function Cert() {
                 <div class="cert-badge">
                     <Gold />
                 </div>
-                <div class="box-col gap5">
+                <div class="box-col">
                     <h4>동네 떡볶이</h4>
                     <div class="box-row gap5"><h5>누적 나눔 횟수</h5><h5 class="var-primary">87</h5></div>
                 </div>
@@ -23,7 +23,7 @@ function Cert() {
                 <div class="cert-badge">
                     <Silver />
                 </div>
-                <div class="box-col gap5">
+                <div class="box-col">
                     <h4>동네 떡볶이</h4>
                     <div class="box-row gap5"><h5>누적 나눔 횟수</h5><h5 class="var-primary">80</h5></div>
                 </div>
@@ -32,7 +32,7 @@ function Cert() {
                 <div class="cert-badge">
                     <Bronze />
                 </div>
-                <div class="box-col gap5">
+                <div class="box-col">
                     <h4>동네 떡볶이</h4>
                     <div class="box-row gap5"><h5>누적 나눔 횟수</h5><h5 class="var-primary">60</h5></div>
                 </div>

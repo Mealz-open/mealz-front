@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<TOPLocation />} />
         <Route path="/search" element={<TOPSearch />} />
-        <Route path="/today" element={<TOPTitle title={'즐겨찾기'} />} />
+        <Route path="/today" element={<TOPTitle title={'오늘의 나눔'} />} />
         <Route path="/like" element={<TOPTitle title={'즐겨찾기'} />} />
       </Routes>
       

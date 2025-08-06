@@ -7,8 +7,8 @@ import Cert from '../asset/certified.js';
 function Home() {
     return(
         <>
-            <div class="article"><SearchBar /></div>
-            <div class="carousel">
+            <div className="article"><SearchBar /></div>
+            <div className="carousel">
             공지사항 / 이벤트
             </div>
             <NanumType />

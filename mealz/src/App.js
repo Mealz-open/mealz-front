@@ -32,7 +32,7 @@ function App() {
       <Route path="/like" element={<TOPTitle title={'즐겨찾기'} />} />
     </Routes>
     
-    <div class="main-contents">
+    <div className="main-contents">
     <Routes>
 
       <Route path="/" element={<Home />} />

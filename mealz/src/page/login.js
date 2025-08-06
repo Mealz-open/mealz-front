@@ -13,10 +13,10 @@ function Login() {
                 내일은 더 많아질 거예요!
             </h3>
         </div>
-        <div class="landing-container">
+        <div className="landing-container">
             <Burger />
         </div>
-        <div class="box-col gap10">
+        <div className="box-col gap10">
           <Link to="/signup" className={`btn-fill btn-primary`}>
             시작하기
           </Link>

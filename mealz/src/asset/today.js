@@ -6,48 +6,48 @@ function Today() {
     navigate('/foodtype?type=오늘의 나눔');
   }
   return (
-      <div class="article">
-        <div class="article-title">
+      <div className="article">
+        <div className="article-title">
             <h3>오늘의 나눔</h3>
             <button onClick={handleClick}><h5>더보기</h5></button>
         </div>
-        <div class="slide-container">
-          <div class="box-col">
-            <img src=""  class="slide-img"/>
-            <div class="slide-time"></div>
-            <div class="slide-info">
+        <div className="slide-container">
+          <div className="box-col">
+            <img src="/"  className="slide-img"/>
+            <div className="slide-time"></div>
+            <div className="slide-info">
                 <h6>최현찬 베이커리</h6>
                 <h5>바게트 3개</h5>
             </div>
           </div>
-          <div class="box-col">
-            <img src=""  class="slide-img"/>
-            <div class="slide-time"></div>
-            <div class="slide-info">
+          <div className="box-col">
+            <img src="/"  className="slide-img"/>
+            <div className="slide-time"></div>
+            <div className="slide-info">
                 <h6>최현찬 베이커리</h6>
                 <h5>바게트 3개</h5>
             </div>
           </div>
-          <div class="box-col">
-            <img src=""  class="slide-img"/>
-            <div class="slide-time"></div>
-            <div class="slide-info">
+          <div className="box-col">
+            <img src="/"  className="slide-img"/>
+            <div className="slide-time"></div>
+            <div className="slide-info">
                 <h6>최현찬 베이커리</h6>
                 <h5>바게트 3개</h5>
             </div>
           </div>
-          <div class="box-col">
-            <img src=""  class="slide-img"/>
-            <div class="slide-time"></div>
-            <div class="slide-info">
+          <div className="box-col">
+            <img src="/"  className="slide-img"/>
+            <div className="slide-time"></div>
+            <div className="slide-info">
                 <h6>최현찬 베이커리</h6>
                 <h5>바게트 3개</h5>
             </div>
           </div>
-          <div class="box-col">
-            <img src=""  class="slide-img"/>
-            <div class="slide-time"></div>
-            <div class="slide-info">
+          <div className="box-col">
+            <img src="/"  className="slide-img"/>
+            <div className="slide-time"></div>
+            <div className="slide-info">
                 <h6>최현찬 베이커리</h6>
                 <h5>바게트 3개</h5>
             </div>

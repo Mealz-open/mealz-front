@@ -2,12 +2,12 @@ import { ReactComponent as AlertIcon } from './icon/icon-alert.svg';
 
 function TOPLocation() {
     return(
-        <div class="top">
+        <div className="top">
             <h1>서울시 종로구</h1>
-            <div class="group-align-left hug">
+            <div className="group-align-left hug">
                 <AlertIcon className="icon-large" />
-                <input type="checkbox" class="toggle-input" id="toggle-usertype"/>
-                <label class="toggle" for="toggle-usertype"/>
+                <input type="checkbox" className="toggle-input" id="toggle-usertype"/>
+                <label className="toggle" htmlFor="toggle-usertype"/>
             </div>
 
         </div>

@@ -1,11 +1,16 @@
-import { ReactComponent as AlertIcon } from './icon/icon-alert.svg';
+import { useNavigate } from 'react-router-dom';
+import { ReactComponent as Chevron } from './icon/icon-chevron.svg';
 
 function TOPTitle({title}) {
+    const navigate = useNavigate();
+
     return(
         <div class="top">
-                <AlertIcon className="icon-large" />
+            <button onClick={()=>navigate(-1)}>
+                <Chevron className="icon-large" />
+            </button>
             <h1>{title}</h1>
-                <AlertIcon className="icon-large" />
+                <Chevron className="icon-large" style={{ visibility:'hidden' }}/>
         </div>
     )
 }

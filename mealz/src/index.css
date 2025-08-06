@@ -75,7 +75,7 @@ hr {/*구분선 디자인*/
 .var-primary{color:var(--color-primary-1);}
 
 /*정렬*/
-#group-align-std, .group-align-std {width: 100%; display: flex; justify-content: space-between !important; align-items: center; gap: 10px;}
+#group-align-std, .group-align-std {width: 100%; display: flex; justify-content: space-between !important; align-items: center;}
 .group-align-left {width: 100%; display: flex; justify-content: flex-start !important; align-items: center; gap: 10px;}
 .group-align-center {width: 100%; display: flex; justify-content: center !important; align-items: center; gap: 10px;}
 .group-align-right {width: 100%; display: flex; justify-content: flex-end !important; align-items: center; gap: 10px;}
@@ -85,6 +85,7 @@ hr {/*구분선 디자인*/
 .gap10 {gap: 10px;}
 .gap12 {gap: 12px;}
 .gap20 {gap: 20px;}
+.gap30 {gap: 30px;}
 
 /*기본 폰트 설정*/
 html {
@@ -203,21 +204,39 @@ h6 {font-weight: 400; font-size: 10px; max-width: 100%; line-height: 16px;}
   cursor: pointer;
 }
 
-/*버튼 설정 - 색상*/
-.btn-primary {
-  color: var(--color-monotone-1); background-color: var(--color-primary-1);
+.btn-catag-small {
+  width: min-content; height: 21px;
+  padding: 5px 16px;
+  background-color: var(--color-primary-2);
+  border-radius: 10.5px;
+  font-size: 10px; font-weight: 700; line-height: 11px; text-wrap: nowrap;
 }
 
-.btn-line {
-  border: 1px solid #B9B9B9; border-radius: 5px; box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.30);
-  background: #FFF;
+.btn-catag-large {
+  width: min-content; height: 27px;
+  padding: 5px 16px;
+  border: 1px solid var(--color-primary-2); border-radius: 13.5px;
+  font-size: 14px; font-weight: 400; line-height: 17px; text-wrap: nowrap; 
 }
+.btn-catag-large:hover{border: 1px solid var(--color-primary-2);}
+
+
+/*버튼 설정 - 색상*/
+.btn-primary {color: var(--color-monotone-1); background-color: var(--color-primary-1);}
+
+.btn-line {border: 1px solid var(--color-monotone-3); border-radius: 5px; box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.30); background: var(--color-bg);}
+.btn-line:hover {border: 1px solid var(--color-primary-1);}
 
 /*이미지*/
 .img-product {
   width: 99px; height: 99px;
   background-color: var(--color-monotone-2);
   flex: 0 0 auto;
+}
+
+.img-product-large {
+  width: 352px; height: 352px;
+  background-color: var(--color-monotone-2);
 }
 
 
@@ -281,7 +300,7 @@ h6 {font-weight: 400; font-size: 10px; max-width: 100%; line-height: 16px;}
   padding: 15px;
   background-color: var(--color-bg);
   border-radius: 5px; border: 1px solid var(--color-monotone-3);
-  display: flex; justify-content: flex-start; align-items: center; gap: 30px;
+  display: flex; justify-content: flex-start; align-items: center; gap: 20px;
 }
 
 .card-col{flex-direction: column;}

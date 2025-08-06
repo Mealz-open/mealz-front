@@ -1,18 +1,35 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function CardMenu({ image, name, quantity, expirationDate, availableTimeRange }) {
-    const formattedExpirationDate = expirationDate ? expirationDate.toLocaleDateString() : 'N/A';
+function CardMenu({ itemId, itemName, itemImageUrls, quantity, expiredDate, pickupStartTime, pickupEndTime }) {
+    const formattedExpiredDate = expiredDate ? new Date(expiredDate).toLocaleDateString() : 'N/A';
+    const formattedPickupStartTime = pickupStartTime ? (() => {
+        const date = new Date(pickupStartTime);
+        const monthDay = new Intl.DateTimeFormat('ko-KR', { month: 'numeric', day: 'numeric' }).format(date);
+        const time = new Intl.DateTimeFormat('ko-KR', {hour: '2-digit', minute: '2-digit', hour12: false}).format(date);
+        return monthDay.replace('.', '월').replace('.', '일').trim() + ' ' + time;
+    })() : 'N/A';
+    const formattedPickupEndTime = pickupEndTime ? (() => {
+        const date = new Date(pickupEndTime);
+        const time = new Intl.DateTimeFormat('ko-KR', {hour: '2-digit', minute: '2-digit', hour12: false}).format(date);
+        return time;
+    })() : 'N/A';
+    
+
+    const navigate = useNavigate();
+
     return(
-        <div class="card-row">
-            <div class="box-col">
-                <h3>{name}</h3>
+        <button class="card-row" onClick={()=>navigate(`/item?id=${itemId}&name=${itemName}`)}>
+            <div class="box-col group-align-std" style={{ height: '100%' }}>
+                <h3>{itemName}</h3>
                 <h5>수량: {quantity}</h5>
-                <h5>소비기한: {formattedExpirationDate}</h5>
-                <h5>수령가능시간: {availableTimeRange.start} - {availableTimeRange.end}</h5>
+                <h5>소비기한: {formattedExpiredDate}</h5>
+                <h5>수령가능시간: {formattedPickupStartTime} - {formattedPickupEndTime}</h5>
             </div>
-            <img src={image} class="img-product"/>
-        </div>
+            <img src={itemImageUrls} class="img-product"/>
+        </button>
     );
 }
 
 export default CardMenu;
+

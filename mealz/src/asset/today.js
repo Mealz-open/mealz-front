@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 function Today() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/today');
+    navigate('/foodtype?type=오늘의 나눔');
   }
   return (
       <div class="article">

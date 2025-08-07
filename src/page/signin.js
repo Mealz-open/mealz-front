@@ -18,11 +18,11 @@ function SignIn() {
             <Burger />
         </div>
         <div class="box-col gap10">
-          <Link to="http://13.209.241.224:8087/oauth2/authorization/kakao" className={`btn-fill gap12`} id='kakao'>
+          <Link to="https://api.mealz.store/oauth2/authorization/kakao" className={`btn-fill gap12`} id='kakao'>
             <img src={Kakao} className='social-logo-img'/>
             카카오로 로그인
           </Link>
-          <Link to="http://13.209.241.224:8087/oauth2/authorization/naver" className={`btn-fill gap12`} id='naver'>
+          <Link to="https://api.mealz.store/oauth2/authorization/naver" className={`btn-fill gap12`} id='naver'>
             <Naver className='social-logo-img'/>
             네이버로 로그인
           </Link>

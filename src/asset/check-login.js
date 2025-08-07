@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 function AuthRedirect() {
-  const apiUrl = process.env.API_URL
+  const apiUrl = process.env.REACT_APP_API_URL
   const [checking, setChecking] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

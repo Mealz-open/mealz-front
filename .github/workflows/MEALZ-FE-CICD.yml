@@ -127,7 +127,7 @@ jobs:
             fi
 
             echo "새로운 컨테이너 $CONTAINER_NAME 실행 중..."
-            echo $PW | sudo -S docker run -d -p ${PORT}:3000 --name $CONTAINER_NAME \
+            echo $PW | sudo -S docker run -d -p ${PORT}:80 --name $CONTAINER_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/mealz-front:${BRANCH}
             
             # <none> 태그로 남은 이미지 정리

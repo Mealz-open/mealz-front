@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 function Item() {
-  const apiUrl = process.env.API_URL
+  const apiUrl = process.env.REACT_APP_API_URL
   const [searchParams] = useSearchParams();
   const foodId = searchParams.get('id');
   const [product, setProduct] = useState(null);

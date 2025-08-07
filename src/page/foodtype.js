@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import CardMenu from "../asset/card-menu";
 
 function FoodType() {
-  const apiUrl = process.env.API_URL
+  const apiUrl = process.env.REACT_APP_API_URL
   const [searchParams] = useSearchParams();
   const foodType = searchParams.get("type");
   const [products, setProducts] = useState([]);

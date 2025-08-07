@@ -14,7 +14,7 @@ function Item() {
     setLoading(true);
     setError(null);
 
-    fetch(`${apiUrl} ${foodId}`, { credentials: "include", })
+    fetch(`${apiUrl}/{${foodId}}`, { credentials: "include", })
       .then(res => {
         if (!res.ok) throw new Error("서버 오류");
         return res.json();

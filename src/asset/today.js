@@ -44,14 +44,6 @@ function Today() {
                 <h5>바게트 3개</h5>
             </div>
           </div>
-          <div className="box-col">
-            <img src="/"  className="slide-img"/>
-            <div className="slide-time"></div>
-            <div className="slide-info">
-                <h6>최현찬 베이커리</h6>
-                <h5>바게트 3개</h5>
-            </div>
-          </div>
         </div>
       </div>
   );

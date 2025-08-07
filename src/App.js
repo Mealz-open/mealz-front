@@ -22,12 +22,26 @@ function App() {
   const foodType = searchParams.get('type');
   const foodId = searchParams.get('name');
 
+  const foodTypeKorean = {
+    KOREAN: "한식",
+    CHINESE: "중식",
+    JAPANESE: "일식",
+    WESTERN: "양식",
+    ASIAN: "아시안",
+    SNACK:"분식",
+    FAST_FOOD: "패스트푸드",
+    DESSERT: "디저트",
+    BEVERAGE: "음료",
+    SIDE_DISH: "반찬",
+    ETC: "기타"
+    }
+
   return (
     <>
     <Routes>
       <Route path="/" element={<TOPLocation />} />
       <Route path="/search" element={<TOPSearch />} />
-      <Route path="/foodtype" element={<TOPTitle title={foodType || ''} />} />
+      <Route path="/foodtype" element={<TOPTitle title={foodTypeKorean[foodType] || ''} />} />
       <Route path="/item" element={<TOPTitle title={foodId || ''} />} />
       <Route path="/like" element={<TOPTitle title={'즐겨찾기'} />} />
     </Routes>

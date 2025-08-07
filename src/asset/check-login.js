@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 function AuthRedirect() {
+  const apiUrl = process.env.API_URL
   const [checking, setChecking] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     async function checkAuth() {
       try {
-        const res = await fetch("https://api.mealz.store/api/member", {
+        const res = await fetch(`${apiUrl}/api/member`, {
           credentials: "include",
         });
 

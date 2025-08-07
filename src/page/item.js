@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 function Item() {
+  const apiUrl = process.env.API_URL
   const [searchParams] = useSearchParams();
   const foodId = searchParams.get('id');
   const [product, setProduct] = useState(null);
@@ -13,7 +14,7 @@ function Item() {
     setLoading(true);
     setError(null);
 
-    fetch(`${API_URL} ${foodId}`, { credentials: "include", })
+    fetch(`${apiUrl} ${foodId}`, { credentials: "include", })
       .then(res => {
         if (!res.ok) throw new Error("서버 오류");
         return res.json();

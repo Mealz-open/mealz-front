@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import CardMenu from "../asset/card-menu";
 
 function FoodType() {
+  const apiUrl = process.env.API_URL
   const [searchParams] = useSearchParams();
   const foodType = searchParams.get("type");
   const [products, setProducts] = useState([]);
@@ -23,7 +24,7 @@ function FoodType() {
           sortDirection: "DESC",
         });
 
-        const res = await fetch(`https://api.mealz.store/api/item?${params}`,{ credentials: "include" });
+        const res = await fetch(`${apiUrl}/api/item?${params}`,{ credentials: "include" });
         if (!res.ok) throw new Error('서버 통신 오류');
 
         const contentType = res.headers.get("content-type");

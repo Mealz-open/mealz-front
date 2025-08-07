@@ -44,6 +44,7 @@ function App() {
       <Route path="/foodtype" element={<TOPTitle title={foodTypeKorean[foodType] || ''} />} />
       <Route path="/item" element={<TOPTitle title={foodId || ''} />} />
       <Route path="/like" element={<TOPTitle title={'즐겨찾기'} />} />
+      <Route path="/profile" element={<TOPTitle title={'마이페이지'} />} />
     </Routes>
     
     <div className="main-contents">

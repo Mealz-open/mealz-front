@@ -15,14 +15,11 @@ jobs:
         uses: actions/checkout@v4
 
       # env 파일 동적 생성 필요 시 주석 해제 후 사용
-      #      # 브랜치별 .env.local 생성
-      #      - name: Create .env.local file
-      #        run: |
-      #          if [ "${{ github.ref_name }}" == "main" ]; then
-      #            echo -e "${{ secrets.ENV_MAIN }}" > .env.local
-      #          elif [ "${{ github.ref_name }}" == "test" ]; then
-      #            echo -e "${{ secrets.ENV_TEST }}" > .env.local
-      #          fi
+      # 브랜치별 .env.local 생성
+      - name: Create .env.local file
+        run: |          
+          echo -e "${{ secrets.ENV_MAIN }}" > .env.local
+
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

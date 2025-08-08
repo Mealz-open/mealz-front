@@ -9,7 +9,7 @@ function TOPTitle({title}) {
             <button onClick={()=>navigate(-1)}>
                 <Chevron className="icon-large" />
             </button>
-            <h1>{title}</h1>
+            <h1 style={{overflow: "hidden", textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{title}</h1>
                 <Chevron className="icon-large" style={{ visibility:'hidden' }}/>
         </div>
     )

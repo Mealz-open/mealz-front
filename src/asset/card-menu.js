@@ -21,7 +21,7 @@ function CardMenu({ itemId, itemName, itemImageUrls, quantity, expiredDate, pick
     return(
         <button class="card-row" onClick={()=>navigate(`/item?id=${itemId}&name=${itemName}`)}>
             <div class="box-col group-align-std" style={{ height: '100%' }}>
-                <h3 style = {{overflow: "hidden", textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'left'}}>{itemName}</h3>
+                <h3 style = {{overflow: "hidden", textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'left', flex: '0 0 auto'}}>{itemName}</h3>
                 <h5>수량: {quantity}</h5>
                 <h5>소비기한: {formattedExpiredDate}</h5>
                 <h5>수령가능시간: {formattedPickupStartTime} - {formattedPickupEndTime}</h5>

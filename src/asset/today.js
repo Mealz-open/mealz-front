@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useSearchParams } from "react-router-dom";
 import CardToday from './card-today'
 
 function Today() {
@@ -50,7 +49,7 @@ function Today() {
     }
 
     fetchItems();
-  }, [foodType]);
+  }, []);
 
 
   return (
@@ -73,6 +72,7 @@ function Today() {
               itemImageUrls={product.itemImageUrls && product.itemImageUrls[0]}
               quantity={product.quantity}
               shopName={product.shopName}
+              pickupEndTime={product.pickupEndTime}
             />
           ))}
         </div>

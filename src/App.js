@@ -16,6 +16,8 @@ import SignUp from './page/signup.js';
 import SignIn from './page/signin.js';
 import FoodType from './page/foodtype.js';
 import Item from './page/item.js';
+import BuyItem from './asset/buy-item.js';
+import BUY from './page/buy.js';
 
 function App() {
   const [searchParams] = useSearchParams();
@@ -39,10 +41,12 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path="/" element={<TOPLocation />} />
+      <Route path="*" element={<TOPLocation />} />
       <Route path="/search" element={<TOPSearch />} />
       <Route path="/foodtype" element={<TOPTitle title={foodTypeKorean[foodType] || ''} />} />
+      <Route path="/today" element={<TOPTitle title={'오늘의 나눔'} />} />
       <Route path="/item" element={<TOPTitle title={foodId || ''} />} />
+      <Route path="/buy" element={<TOPTitle title={'신청하기'} />} />
       <Route path="/like" element={<TOPTitle title={'즐겨찾기'} />} />
       <Route path="/profile" element={<TOPTitle title={'마이페이지'} />} />
     </Routes>
@@ -50,7 +54,7 @@ function App() {
     <div className="main-contents">
     <Routes>
 
-      <Route path="/" element={<Home />} />
+      <Route path="*" element={<Home />} />
       <Route path="/search" element={<Search />} />
       <Route path="/like" element={<Like />} />
       <Route path="/profile" element={<Profile />} />
@@ -58,8 +62,9 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/foodtype" element={<FoodType />} />
+      <Route path="/today" element={<FoodType />} />
       <Route path="/item" element={<Item />} />
-
+      <Route path="/buy" element={<BUY />} />
     </Routes>
     </div>
 
@@ -68,12 +73,13 @@ function App() {
       <Route path="/login" element={''} />
       <Route path="/signup" element={''} />
       <Route path="/signin" element={''} />
+      <Route path="/item" element={<BuyItem />} />
+      <Route path="/buy" element={<BuyItem />} />
     </Routes>
 
     <Routes>
+      <Route path="*" element={''} />
       <Route path="/profile" element={<PrivateRoute />} />
-      <Route path="/signup" element={''} />
-      <Route path="/signin" element={''} />
     </Routes>
   </>
   );

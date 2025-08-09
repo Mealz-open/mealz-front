@@ -221,6 +221,25 @@ h6 {font-weight: 400; font-size: 10px; max-width: 100%; line-height: 16px;}
 }
 .btn-catag-large:hover{border: 1px solid var(--color-primary-2);}
 
+.btn-circle {
+  width: 20px; height: 20px;
+  border-radius: 10px;
+  background-color: var(--color-monotone-2);
+  display: flex; justify-content: center; align-items: center;
+}
+
+.btn-menu-slide {
+  width:55px; height: 72px;
+  border-bottom: 2px solid var(--color-monotone-2);
+  flex: 0 0 auto;
+}
+.btn-menu-slide.active {border-bottom: 2px solid var(--color-primary-1);}
+.btn-menu-slide>img {width:45px; height: 45px;}
+.type-slide {
+  margin: 0 0 30px 0;
+  gap: 5px;
+  overflow: scroll;
+}
 
 /*버튼 설정 - 색상*/
 .btn-primary {color: var(--color-monotone-1); background-color: var(--color-primary-1);}

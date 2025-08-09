@@ -4,12 +4,14 @@ import Today from '../asset/today.js';
 import Map from '../asset/map.js';
 import Cert from '../asset/certified.js';
 
+import bannerImg from '../asset/image/img-banner.png';
+
 function Home() {
     return(
         <>
             <div className="article"><SearchBar /></div>
             <div className="carousel">
-            공지사항 / 이벤트
+                <img src={bannerImg} />
             </div>
             <NanumType />
             <Today />

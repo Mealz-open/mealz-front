@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Chevron } from '../asset/icon/icon-chevron.svg';
 
 function Profile() {
   const [member, setMember] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   const apiUrl = process.env.REACT_APP_API_URL
 
   useEffect(() => {
@@ -51,7 +52,7 @@ function Profile() {
       </div>
       <div className="article">
         <div className="box-col gap10">
-          <button className="btn-fill btn-line group-align-std">
+          <button className="btn-fill btn-line group-align-std" onClick={()=>navigate(`/editname`)}>
             이름
             <Chevron className="icon-large" style={{ transform: 'rotate(180deg)' }} />
           </button>

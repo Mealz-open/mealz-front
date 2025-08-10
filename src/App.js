@@ -78,7 +78,7 @@ function App() {
     </Routes>
 
     <Routes>
-      <Route path="*" element={'<PrivateRoute />'} />
+      <Route path="*" element={<PrivateRoute />} />
       <Route path="/" element={''} />
     </Routes>
   </>

@@ -80,6 +80,9 @@ function App() {
     <Routes>
       <Route path="*" element={<PrivateRoute />} />
       <Route path="/" element={''} />
+      <Route path="/login" element={''} />
+      <Route path="/signin" element={''} />
+      <Route path="/signup" element={''} />
     </Routes>
   </>
   );

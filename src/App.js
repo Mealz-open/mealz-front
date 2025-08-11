@@ -12,6 +12,7 @@ import Search from './page/search.js';
 import Like from './page/like.js';
 import Profile from './page/profile.js';
 import EditName from './page/edit-name.js';
+import EditLocation from './page/edit-location.js';
 import Login from './page/login.js';
 import SignUp from './page/signup.js';
 import SignIn from './page/signin.js';
@@ -43,6 +44,7 @@ function App() {
   }
 
   const [editNickname, setNickname] = useState("");
+  const [editLocation, setLocation] = useState("");
 
   return (
     <>
@@ -56,6 +58,7 @@ function App() {
       <Route path="/like" element={<TOPTitle title={'즐겨찾기'} />} />
       <Route path="/profile" element={<TOPTitle title={'마이페이지'} />} />
       <Route path="/editname" element={<TOPTitle title={'이름'} />} />
+      <Route path="/editlocation" element={<TOPTitle title={'위치'} />} />
     </Routes>
     
     <div className="main-contents">
@@ -65,6 +68,7 @@ function App() {
       <Route path="/like" element={<Like />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/editname" element={<EditName editNickname={editNickname} setNickname={setNickname} />} />
+      <Route path="/editlocation" element={<EditLocation editLocation={editLocation} setLocation={setLocation} />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin" element={<SignIn />} />
@@ -83,6 +87,7 @@ function App() {
       <Route path="/item" element={<BuyItem />} />
       <Route path="/buy" element={<BuyItem />} />
       <Route path="/editname" element={<SaveEdit editNickname={editNickname} />} />
+      <Route path="/editlocation" element={<SaveEdit editLocation={editLocation} />} />
     </Routes>
 
     <Routes>

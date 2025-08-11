@@ -8,6 +8,11 @@ function Profile() {
   const navigate = useNavigate();
   const apiUrl = process.env.REACT_APP_API_URL
 
+  const userTypeKorean = {
+    BENEFICIARY: "수혜자",
+    DONOR: "기부자",
+  }
+
   useEffect(() => {
     fetch(`${apiUrl}/api/member`, {
       credentials: 'include', // 쿠키 자동 전송
@@ -33,10 +38,8 @@ function Profile() {
     <>
       <div className="box-profile">
         <img className="img-profile" src={member.profileUrl || ''}/>
-        <h2>{member.memberType}</h2>
-        <h4>
-          {member.nickname ? `${member.nickname} (${member.name})` : member.name}
-        </h4>
+        <h2>{member.nickname ? `${member.nickname} (${member.name})` : member.name}</h2>
+        <h4>{userTypeKorean[member.memberType]}</h4>
         <div className="btn-group">
           <div className="btn-catag-small">도시락</div>
           <div className="btn-catag-small">한식</div>
@@ -56,7 +59,7 @@ function Profile() {
             이름
             <Chevron className="icon-large" style={{ transform: 'rotate(180deg)' }} />
           </button>
-          <button className="btn-fill btn-line group-align-std">
+          <button className="btn-fill btn-line group-align-std" onClick={()=>navigate(`/editlocation`)}>
             위치 수정
             <Chevron className="icon-large" style={{ transform: 'rotate(180deg)' }} />
           </button>

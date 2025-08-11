@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Map, MapMarker, useKakaoLoader } from "react-kakao-maps-sdk";
 
 function KakaoMap() {
-  const [loading, error] = useKakaoLoader({
-    appkey: process.env.REACT_APP_KAKAO_KEY,
-  });
+  const apiUrl = process.env.REACT_APP_KAKAO_KEY;
+  const [loading, error] = useKakaoLoader({appkey: apiUrl,});
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error!</div>;

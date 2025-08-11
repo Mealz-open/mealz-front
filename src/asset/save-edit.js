@@ -15,8 +15,9 @@ function SaveEdit({ editNickname }) {
 
     try {
       const response = await fetch(`${apiUrl}/api/member`, {
+        credentials: "include",
         method: "POST",
-        body: formData
+        body: formData,
       });
       if (response.ok) {
         alert("저장 완료!");

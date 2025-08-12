@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import CardMenu from "../asset/card-menu";
+import CardShop from "../asset/card-shop";
 
 function SearchResult() {
   // 활성 탭 상태
@@ -32,13 +33,13 @@ function SearchResult() {
 
     try {
       // 문서 기준으로 item만 처리, 만약 shop Search가 필요하면 endpoint, body 변경 필요
-      const endpoint = "/api/search/item";
+      const endpoint = 
+        activeTab === "list" ? "/api/search/item" : "/api/search/shop";
 
       const body = {
         keyword,
         pageNumber,
         pageSize,
-        sortField,
         sortDirection
       };
 
@@ -68,7 +69,7 @@ function SearchResult() {
   // 의존성 배열에 page 파라미터, sort 등 포함
   useEffect(() => {
     fetchData();
-  }, [activeTab, keyword, pageNumber, pageSize, sortField, sortDirection]);
+  }, [activeTab, keyword, pageNumber, pageSize, sortDirection]);
 
   return (
     <div className="article">
@@ -95,7 +96,7 @@ function SearchResult() {
       {activeTab === "list" ? (
         <div className="box-col gap10">
           {items.length > 0 ? (
-            items.map((item, index) => (
+            items.map((item) => (
               <CardMenu
                 key={item.itemId}
                 itemId={item.itemId}
@@ -108,21 +109,31 @@ function SearchResult() {
               />
             ))
           ) : (
-            <li>검색 결과가 없습니다.</li>
+            <li>메뉴 검색 결과가 없습니다.</li>
           )}
         </div>
       ) : (
-        <div>
+        <div className="box-col gap10">
           {items.length > 0 ? (
-            items.map((item, index) => (
-              <div key={item.itemId || index} style={{ marginBottom: "10px" }}>
-                <strong>{item.shopName || "상점명 없음"}</strong>
-                <br />
-                {item.siGunGu}, {item.eupMyeonDong}
-              </div>
+            items.map((shop) => (
+              <CardShop
+                key={shop.shopId}
+                shopId={shop.shopId}
+                shopName={shop.shopName}
+                shopCategory={shop.shopCategory}
+                profileUrl = {shop.profileUrl}
+                siDo={shop.siDo}
+                siGunGu={shop.siGunGu}
+                eupMyoenDong={shop.eupMyoenDong}
+                ri={shop.ri}
+                longitude = {shop.longitude}
+                latitude = {shop.latitude}
+                openTime={shop.openTime}
+                closeTime={shop.closeTime}
+              />
             ))
           ) : (
-            <p>지도 결과가 없습니다.</p>
+            <p>매장 검색 결과가 없습니다.</p>
           )}
         </div>
       )}

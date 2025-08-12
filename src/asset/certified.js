@@ -1,13 +1,20 @@
+import { useNavigate } from 'react-router-dom';
+
 import { ReactComponent as Gold } from './icon/icon-gold.svg';
 import { ReactComponent as Silver } from './icon/icon-silver.svg';
 import { ReactComponent as Bronze } from './icon/icon-bronze.svg';
 
+
 function Cert() {
+    const navigate = useNavigate();
+    const handleClick = () => {
+      navigate('/certifiedstores');
+    }
     return(
         <div className="article">
           <div className="article-title">
               <h3>인증 배지 보유 매장</h3>
-              <button><h5>더보기</h5></button>
+              <button onClick={handleClick}><h5>더보기</h5></button>
           </div>
           <div className="box-col gap10">
             <div className="card-row">

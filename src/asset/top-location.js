@@ -8,7 +8,7 @@ function TOPLocation() {
 
     const userTypeKorean = {
         BENEFICIARY: "수혜자",
-        DONOR: "기부자",
+        DONATOR: "기부자",
       }
 
     useEffect(() => {

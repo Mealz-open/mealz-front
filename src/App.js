@@ -22,9 +22,12 @@ import Item from './page/item.js';
 import BUY from './page/buy.js';
 import Shop from './page/shop.js';
 import SaveEdit from './page/save-edit.js';
+import Register from "./page/register.js";
+import PickUp from "./page/pickup.js";
 
 import GNB from './asset/gnb.js';
 import BuyItem from './asset/buy-item.js';
+import RegisterItem from './asset/register-item.js';
 
 function App() {
   const [searchParams] = useSearchParams();
@@ -62,6 +65,8 @@ function App() {
       <Route path="/editname" element={<TOPTitle title={'이름'} />} />
       <Route path="/editlocation" element={<TOPTitle title={'위치'} />} />
       <Route path="/editmembertype" element={<TOPTitle title={'회원 유형'} />} />
+      <Route path="/register" element={<TOPTitle title={'물품 등록'} />} />
+      <Route path="/pickup" element={<TOPTitle title={'수령 내역 조회'} />} />
     </Routes>
     
     <div className="main-contents">
@@ -83,6 +88,8 @@ function App() {
       <Route path="/editname" element={<SaveEdit />} />
       <Route path="/editlocation" element={<SaveEdit />} />
       <Route path="/editmembertype" element={<SaveEdit />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/pickup" element={<PickUp />} />
     </Routes>
     </div>
 
@@ -96,6 +103,7 @@ function App() {
       <Route path="/editname" element={''} />
       <Route path="/editlocation" element={''} />
       <Route path="/editmembertype" element={''} />
+      <Route path="/register" element={<RegisterItem />} />
     </Routes>
 
     <Routes>

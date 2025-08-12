@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
 import CardMenu from "../asset/card-menu";
-import TypeSlide from "../asset/type-slide";
 
-function FoodType() {
+function FoodToday() {
   const apiUrl = process.env.REACT_APP_API_URL;
-  const [searchParams] = useSearchParams();
-  const foodType = searchParams.get("type");
 
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false); // 로딩 상태
-  const [error, setError] = useState(null); // 에러 메시지
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [hasMore, setHasMore] = useState(true); // 더 불러올 데이터 여부
+  const [hasMore, setHasMore] = useState(true);
 
-  // 페이지 번호에 따라 데이터 불러오기 함수
+  // 오늘 날짜 구하기 (YYYY-MM-DD)
+  const today = new Date().toISOString().split("T")[0];
+
   const fetchItems = useCallback(
     async (page) => {
       setLoading(true);
@@ -22,11 +20,11 @@ function FoodType() {
 
       try {
         const params = new URLSearchParams({
-          shopCategory: foodType || "",
+          date: today, // 오늘 날짜 필터 추가
           pageNumber: page,
           pageSize: 20,
-          sortField: "CREATED_DATE",
-          sortDirection: "DESC",
+          sortField: "PICKUP_TIME",
+          sortDirection: "ASC",
         });
 
         const res = await fetch(`${apiUrl}/api/item?${params}`, {
@@ -44,9 +42,8 @@ function FoodType() {
         const data = await res.json();
 
         if (data.content.length === 0) {
-          // 더 이상 데이터가 없으면
           setHasMore(false);
-          if (page === 1) setProducts([]); // 첫 페이지 결과가 없으면 빈 배열로 초기화
+          if (page === 1) setProducts([]);
         } else {
           if (page === 1) {
             setProducts(data.content);
@@ -61,43 +58,36 @@ function FoodType() {
         setLoading(false);
       }
     },
-    [apiUrl, foodType]
+    [apiUrl, today]
   );
 
-  // foodType이 바뀌면 초기화 후 첫 페이지 불러오기
   useEffect(() => {
     setPageNumber(1);
     setHasMore(true);
     fetchItems(1);
-  }, [foodType, fetchItems]);
+  }, [fetchItems]);
 
-  // pageNumber가 변경될 때마다 데이터를 추가로 불러옴 (1페이지는 위 useEffect에서 처리)
   useEffect(() => {
-    if (pageNumber === 1) return; // 이미 첫 페이지는 로드됨
+    if (pageNumber === 1) return;
     fetchItems(pageNumber);
   }, [pageNumber, fetchItems]);
 
-  // 스크롤 이벤트 핸들러: 스크롤이 거의 바닥에 도달하면 pageNumber 증가
   useEffect(() => {
     if (loading || !hasMore) return;
 
     function handleScroll() {
       const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-      // 바닥에서 100px 이내 도달 시 추가 데이터 로드
       if (scrollTop + clientHeight >= scrollHeight - 100) {
         setPageNumber((prevPage) => prevPage + 1);
       }
     }
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, [loading, hasMore]);
 
   return (
     <div className="article">
-      <TypeSlide />
       <div className="box-col gap10">
         {products.map((product) => (
           <CardMenu
@@ -114,11 +104,11 @@ function FoodType() {
 
         {loading && <p>로딩 중입니다...</p>}
         {error && <p style={{ color: "crimson" }}>{error}</p>}
-        {!loading && !error && products.length === 0 && <p>해당 카테고리에 물품이 없습니다.</p>}
+        {!loading && !error && products.length === 0 && <p>해당 카테고리에 오늘 날짜의 물품이 없습니다.</p>}
         {!hasMore && products.length > 0 && <p>불러올 항목이 더 이상 없습니다.</p>}
       </div>
     </div>
   );
 }
 
-export default FoodType;
+export default FoodToday;

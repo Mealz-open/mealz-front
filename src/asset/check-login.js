@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
-function AuthRedirect() {
+function PrivateRoute() {
   const apiUrl = process.env.REACT_APP_API_URL
   const [checking, setChecking] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,4 +38,4 @@ function AuthRedirect() {
   return isLoggedIn ? '' : (<Navigate to="/login" replace />);
 }
 
-export default AuthRedirect;
+export default PrivateRoute;

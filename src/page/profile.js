@@ -67,8 +67,8 @@ function Profile() {
             관심 카테고리
             <Chevron className="icon-large" style={{ transform: 'rotate(180deg)' }} />
           </button>
-          <button className="btn-fill btn-line group-align-std">
-            회원 유형 추가
+          <button className="btn-fill btn-line group-align-std" onClick={()=>navigate(`/editmembertype`)}>
+            회원 유형 변경
             <Chevron className="icon-large" style={{ transform: 'rotate(180deg)' }} />
           </button>
         </div>

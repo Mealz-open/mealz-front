@@ -5,7 +5,7 @@ import CardToday from './card-today'
 function Today() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/today?today=true');
+    navigate('/today');
   }
 
   const apiUrl = process.env.REACT_APP_API_URL
@@ -13,18 +13,22 @@ function Today() {
   const [loading, setLoading] = useState(false); // 추가: 로딩 상태
   const [error, setError] = useState(null); // 추가: 에러 메시지
 
+  const today = new Date().toISOString().split('T')[0];
+
   useEffect(() => {
+    let intervalId;
+  
     async function fetchItems() {
       setLoading(true);
       setError(null);
   
       try {
         const params = new URLSearchParams({
+          date: today,
           pageNumber: 1,
           pageSize: 20,
-          sortField: "CREATED_DATE",
-          sortDirection: "DESC",
-          pickupToday: true,
+          sortField: "PICKUP_TIME",
+          sortDirection: "ASC",
         });
   
         const res = await fetch(`${apiUrl}/api/item?${params}`, { credentials: "include" });
@@ -41,15 +45,16 @@ function Today() {
       } catch (e) {
         setError(e?.message ?? "알 수 없는 에러");
         setProducts([]);
+        clearInterval(intervalId); // Stop the interval on error
       }
       setLoading(false);
     }
   
-    fetchItems(); // 초기 실행
-    const intervalId = setInterval(fetchItems, 1000); // 1초(1000ms)마다 실행
+    fetchItems(); // Initial fetch
+    intervalId = setInterval(fetchItems, 1000); // Repeat every 1 second
   
-    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 타이머 정리
-  }, []);
+    return () => clearInterval(intervalId); // Clear interval on unmount
+  }, [today]);
 
 
   return (

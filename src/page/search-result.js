@@ -81,13 +81,13 @@ function SearchResult() {
           className={`btn-simple ${activeTab === "list" ? "active" : ""}`}
           onClick={() => setActiveTab("list")}
         >
-          <h4>목록으로 보기</h4>
+          <h4>메뉴 보기</h4>
         </button>
         <button
           className={`btn-simple ${activeTab === "map" ? "active" : ""}`}
           onClick={() => setActiveTab("map")}
         >
-          <h4>지도로 보기</h4>
+          <h4>가게 보기</h4>
         </button>
       </div>
 

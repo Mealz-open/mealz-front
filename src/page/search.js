@@ -74,7 +74,7 @@ function Search() {
           searchTerms.map((term, index) => 
             <li key={index}>
               <div style={{display: 'flex', justifyContent: 'space-between', alignContent: 'center'}}>
-              <p style={{height: 50, lineHeight: '50px'}}>{index}</p>
+              <p style={{height: 50, lineHeight: '50px'}}>{index + 1}</p>
               <p style={{height: 50, lineHeight: '50px'}}>{term}</p>
               </div>
               <hr/>

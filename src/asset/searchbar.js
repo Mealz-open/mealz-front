@@ -9,7 +9,7 @@ function SearchBar() {
   const initialKeyword = params.get("query") || "";
 
   const handleClick = () => {
-    if (location.pathname !== '/search') {
+    if (!(location.pathname === '/search' || location.pathname === '/searchresult')) {
       navigate('/search');
     }
   };
@@ -30,8 +30,8 @@ function SearchBar() {
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="식품 및 가게 검색"
-          readOnly={location.pathname !== '/search'}
-          autoFocus={location.pathname === '/search'}
+          readOnly={!(location.pathname === '/search' || location.pathname === '/searchresult')}
+          autoFocus={location.pathname === '/search' || location.pathname === '/searchresult'}
         />
         <SearchIcon className="icon-medium" />
       </div>

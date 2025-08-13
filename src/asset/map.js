@@ -14,3 +14,5 @@ function KakaoMap() {
     </Map>
   );
 }
+
+export default KakaoMap;

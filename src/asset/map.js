@@ -10,7 +10,7 @@ const bounds = L.latLngBounds(
 )
 function App() {
   return (
-    <div>
+    <div style={{zIndex: 1}}>
       <MapContainer
         center={position} // 초기 중심 좌표
         zoom={8.0} // 초기 줌 레벨

@@ -29,7 +29,6 @@ import AddMyShop from "./page/addmyshop.js";
 
 import GNB from './asset/gnb.js';
 import BuyItem from './asset/buy-item.js';
-import RegisterItem from './asset/register-item.js';
 
 function App() {
   const [searchParams] = useSearchParams();

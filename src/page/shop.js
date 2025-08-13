@@ -79,7 +79,7 @@ function Shop() {
         <div>
           <h2>가게 정보</h2>
           <h5>전화번호</h5>
-          <p>{shop.PhoneNumber}</p>
+          <p>{shop.shopPhoneNumber}</p>
           <h5>영업시간</h5>
           <p>{shop.openTime} ~ {shop.closeTime}</p>
           <img className="map-container" alt="매장 위치 지도" />

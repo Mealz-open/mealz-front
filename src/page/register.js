@@ -1,111 +1,159 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomCallender from '../asset/callender.js';
 import Timeselector from '../asset/timeselecor.js';
 import { ReactComponent as PictureIcon } from "../asset/icon/icon-picture.svg";
+import { ReactComponent as ChevronIcon } from "../asset/icon/icon-chevron.svg";
 
-function Register({ shopId }) {
-    // 물품 이름 상태
+function Register() {
+    const apiBaseUrl = process.env.REACT_APP_API_URL || "";
+
+    // 매장 관련 상태
+    const [shops, setShops] = useState([]);
+    const [selectedShopId, setSelectedShopId] = useState("");
+
+    // 물품 관련 상태
     const [itemName, setItemName] = useState('');
-    // 수량 상태 (기본값 1)
     const [quantity, setQuantity] = useState(1);
-    // 소비기한 날짜 상태
     const [expiredDate, setExpiredDate] = useState();
-    // 픽업 날짜 상태
     const [pickupDate, setPickupDate] = useState();
-    // 픽업 시작 시간 상태
     const [startTime, setStartTime] = useState();
-    // 픽업 종료 시간 상태
     const [endTime, setEndTime] = useState();
-    // 첨부한 이미지 파일과 미리보기 URL을 저장하는 상태
     const [images, setImages] = useState([]);
 
-    // 이미지 파일 선택 시 실행되는 함수
+    // 매장 목록 불러오기
+    useEffect(() => {
+        const fetchShops = async () => {
+            try {
+                // 1. 내 정보 조회 → memberId 가져오기
+                const meRes = await fetch(`${apiBaseUrl}/api/member`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                    },
+                    credentials: "include",
+                });
+                if (!meRes.ok) throw new Error("회원 정보 조회 실패");
+                const meData = await meRes.json();
+                if (!meData.memberId) throw new Error("memberId를 찾을 수 없습니다.");
+
+                // 2. 내 매장 목록 조회
+                const shopRes = await fetch(`${apiBaseUrl}/api/shop/member/${meData.memberId}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                    },
+                    credentials: "include",
+                });
+                if (!shopRes.ok) throw new Error("매장 목록 조회 실패");
+
+                const shopData = await shopRes.json();
+                setShops(shopData || []);
+
+                // 기본 선택값 첫 번째 매장
+                if (shopData.length > 0) {
+                    setSelectedShopId(shopData[0].shopId);
+                }
+            } catch (err) {
+                console.error(err);
+                alert(`매장 정보를 불러오지 못했습니다: ${err.message}`);
+            }
+        };
+
+        fetchShops();
+    }, [apiBaseUrl]);
+
+    // 이미지 파일 선택
     const handleImageChange = (e) => {
         const files = e.target.files;
         if (!files) return;
-
-        // 선택된 파일을 배열로 변환하며 미리보기 URL 생성
         const fileArray = Array.from(files).map(file => ({
             file,
             preview: URL.createObjectURL(file),
         }));
-
-        // 기존 이미지 배열에 새 이미지 추가
         setImages(prevImages => [...prevImages, ...fileArray]);
     };
 
-    // 숨겨진 파일 선택창을 클릭하도록 유도하는 함수
     const triggerFileInput = () => {
         document.getElementById('imageInput').click();
     };
 
-    // 수량 증가
-    const incrementQuantity = () => {
-        setQuantity(prev => prev + 1);
-    };
+    const incrementQuantity = () => setQuantity(prev => prev + 1);
+    const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
 
-    // 수량 감소 (최소 1까지)
-    const decrementQuantity = () => {
-        setQuantity(prev => Math.max(1, prev - 1));
-    };
+    const toLocalDateTimeString = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hour = String(date.getHours()).padStart(2, '0');
+        const minute = String(date.getMinutes()).padStart(2, '0');
+        const second = String(date.getSeconds()).padStart(2, '0');
+        
+        return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+      };
 
-    // 날짜와 시간을 합쳐서 ISO 형식(yyyy-MM-ddTHH:mm:ss)으로 변환하는 함수
     const combineDateAndTime = (date, time) => {
         if (!date || !time) return null;
+      
+        const { ampm, hour, minute } = time;
         const dateObj = new Date(date);
-        const [hours, minutes] = time.split(':').map(Number);
-        dateObj.setHours(hours);
-        dateObj.setMinutes(minutes);
+      
+        // 12시간제를 24시간제로 변환
+        let hour24 = hour % 12;
+        if (ampm === '오후') hour24 += 12;
+      
+        dateObj.setHours(hour24);
+        dateObj.setMinutes(minute);
         dateObj.setSeconds(0);
         dateObj.setMilliseconds(0);
-        return dateObj.toISOString(); // ex) 2025-08-13T10:00:00.000Z
-    };
+      
+        return toLocalDateTimeString(dateObj);
+      };
 
-    // 등록 버튼 클릭 시 실행되는 함수
     const handleSubmit = async () => {
-        // 필수값 검증
-        if (!itemName || quantity < 1 || !expiredDate || !pickupDate || !startTime || !endTime) {
+        if (!selectedShopId || !itemName || quantity < 1 || !expiredDate || !pickupDate || !startTime || !endTime) {
             alert('모든 필수 항목을 입력해주세요.');
             return;
         }
 
-        // 날짜/시간을 ISO 형식 문자열로 변환
-        const expiredDateISO = combineDateAndTime(expiredDate, "00:00") || new Date(expiredDate).toISOString();
+        const expiredDateISO = expiredDate;
         const pickupStartDateISO = combineDateAndTime(pickupDate, startTime);
         const pickupEndDateISO = combineDateAndTime(pickupDate, endTime);
-
         if (!pickupStartDateISO || !pickupEndDateISO) {
             alert('픽업 시작 및 종료 시간을 올바르게 선택해주세요.');
             return;
         }
 
-        // FormData 생성 (multipart/form-data 전송용)
         const formData = new FormData();
-        formData.append('shopId', shopId);                  // 매장 UUID
-        formData.append('itemName', itemName);              // 물품 이름
-        formData.append('quantity', quantity.toString());   // 수량
-        formData.append('expiredDate', expiredDateISO);      // 소비기한
-        formData.append('pickupStartDate', pickupStartDateISO); // 픽업 시작
-        formData.append('pickupEndDate', pickupEndDateISO);     // 픽업 종료
+        formData.append('shopId', selectedShopId);
+        formData.append('itemName', itemName);
+        formData.append('quantity', quantity.toString());
+        formData.append('expiredDate', expiredDateISO);
+        formData.append('pickupStartDate', pickupStartDateISO);
+        formData.append('pickupEndDate', pickupEndDateISO);
 
-        // 업로드할 이미지 파일 추가
         images.forEach(imgObj => {
             formData.append('itemImages', imgObj.file);
         });
 
-        const apiBaseUrl = process.env.REACT_APP_API_URL || "";
-
         try {
-            // API 요청
-            const response = await fetch(`${apiBaseUrl}/api/item` , {
+            const response = await fetch(`${apiBaseUrl}/api/item`, {
                 method: 'POST',
-                credentials: "include", // 쿠키 포함
+                credentials: "include",
                 body: formData,
             });
 
             if (response.ok) {
                 alert('물품이 성공적으로 등록되었습니다.');
-                // 필요하다면 상태 초기화 가능
+                // 폼 초기화
+                setItemName('');
+                setQuantity(1);
+                setExpiredDate(null);
+                setPickupDate(null);
+                setStartTime(null);
+                setEndTime(null);
+                setImages([]);
             } else {
                 const errorText = await response.text();
                 alert(`등록 실패: ${errorText}`);
@@ -116,8 +164,38 @@ function Register({ shopId }) {
     };
 
     return (
-        <div className="article gap50">
-            {/* 물품 이름 입력 */}
+        <div className="article gap30">
+            {/* 매장 선택 */}
+            <div className="box-col gap5" style={{ position: 'relative' }}>
+                <h3>매장 선택</h3>
+                <select
+                    className="input-box"
+                    value={selectedShopId}
+                    onChange={(e) => setSelectedShopId(e.target.value)}
+                    style={{
+                    appearance: 'none',         // hide default arrow
+                    WebkitAppearance: 'none',
+                    MozAppearance: 'none',
+                    paddingRight: '30px',      // space for custom arrow
+                    }}
+                >
+                    {shops.map((shop) => (
+                    <option key={shop.shopId} value={shop.shopId}>
+                        {shop.shopName}
+                    </option>
+                    ))}
+                </select>
+
+                <ChevronIcon
+                    style={{
+                    width: '16px',height: '16px',
+                    position: 'absolute',right: '7px',top: '52px',transform: 'translateY(-50%) rotate(270deg)',
+                    pointerEvents: 'none', // allows clicks through the icon
+                    }}
+                />
+            </div>
+
+            {/* 물품 이름 */}
             <div className="box-col gap5">
                 <h3>물품 이름</h3>
                 <input
@@ -129,7 +207,7 @@ function Register({ shopId }) {
                 />
             </div>
 
-            {/* 수량 조절 */}
+            {/* 수량 */}
             <div className="box-row group-align-std">
                 <h3>수량</h3>
                 <div className="box-row group-align-std" style={{ width: 120 }}>
@@ -139,7 +217,7 @@ function Register({ shopId }) {
                 </div>
             </div>
 
-            {/* 소비기한 선택 */}
+            {/* 소비기한 */}
             <div className="box-col gap5">
                 <h3>유통/소비기한</h3>
                 <CustomCallender
@@ -149,7 +227,7 @@ function Register({ shopId }) {
                 />
             </div>
 
-            {/* 픽업 날짜 및 시간 설정 */}
+            {/* 픽업 시간 설정 */}
             <div className="box-col gap5">
                 <h3>픽업 시간 설정</h3>
                 <CustomCallender
@@ -171,7 +249,7 @@ function Register({ shopId }) {
                 </div>
             </div>
 
-            {/* 이미지 첨부 및 미리보기 */}
+            {/* 이미지 첨부 */}
             <div className="box-row gap10" style={{ overflow: 'scroll' }}>
                 <button
                     className='btn-sqr btn-dash'
@@ -190,10 +268,7 @@ function Register({ shopId }) {
                     onChange={handleImageChange}
                 />
 
-                <div
-                    className="image-preview-container"
-                    style={{ display: 'flex', gap: '10px' }}
-                >
+                <div className="image-preview-container" style={{ display: 'flex', gap: '10px' }}>
                     {images.map((imgObj, index) => (
                         <img
                             key={index}
@@ -201,15 +276,18 @@ function Register({ shopId }) {
                             alt={`첨부사진${index + 1}`}
                             width={50}
                             height={50}
-                            style={{ objectFit: 'cover', borderRadius: '5px' }}
-                            border={'1px solid var(--color-monotone-3)'}
+                            style={{ objectFit: 'cover', borderRadius: '5px', border: '1px solid var(--color-monotone-3)' }}
                         />
                     ))}
                 </div>
             </div>
 
             {/* 등록 버튼 */}
-            <button className='btn-fill btn-primary' onClick={handleSubmit} style={{ width: 353, position: 'absolute', bottom: 45 }}>
+            <button
+                className='btn-fill btn-primary'
+                onClick={handleSubmit}
+                style={{ width: 353, position: 'absolute', bottom: 45 }}
+            >
                 등록하기
             </button>
         </div>

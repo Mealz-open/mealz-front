@@ -14,7 +14,7 @@ function KakaoMap() {
             <h3>주변 나눔 매장</h3>
             <button><h5>더보기</h5></button>
         </div>
-        <Map center= {{ lat: 37.5665, lng: 126.9780 }} level= {3} className="map-container">
+        <Map center= {{ lat: 37.5665, lng: 126.9780 }} level= {3} className="map-container" style={{width: 353, height: 160}}>
           <MapMarker position={{ lat: 37.5665, lng: 126.9780 }}><div>서울</div></MapMarker>
         </Map>
       </div>

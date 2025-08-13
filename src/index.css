@@ -384,12 +384,7 @@ h6 {font-weight: 400; font-size: 10px; max-width: 100%; line-height: 16px;}
   line-height: 1.0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left;
   flex: 0 1 auto;}
-
-/*map*/
-.map-container {
-  width: 353px; height: 160px;
-}
-
+  
 /*셀렉터*/
 
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, Link, useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Chevron } from '../asset/icon/icon-chevron.svg';
 
 function Item() {
@@ -9,6 +10,7 @@ function Item() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const foodTypeKorean = {
     KOREAN: "한식",
@@ -60,10 +62,10 @@ function Item() {
       <div className='box-col gap30'>
         <img src={product.itemImageUrls && product.itemImageUrls[0]} className='img-product-large' alt={product.itemName}/>
         <div className='box-col gap10'>
-          <Link to='/store' className="box-row group-align-left" style={{alignItems: 'center'}}>
+          <button onClick={()=>navigate(`/shop?id=${product.shopId}`)} className="box-row group-align-left" style={{alignItems: 'center'}}>
             <h3>{product.shopName}</h3>
             <Chevron className="icon-large" style={{ transform: 'rotate(180deg)', width: 7, height: 14 }} />
-          </Link>
+          </button>
           <h1>{product.itemName}</h1>
           <div className="btn-catag-small">
             {foodTypeKorean[product.shopCategory] || product.shopCategory}

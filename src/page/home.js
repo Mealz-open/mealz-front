@@ -15,7 +15,7 @@ function Home() {
             </div>
             <NanumType />
             <Today />
-            <Map />
+            <Map latitude={37.5665} longitude={126.978} />
             <Cert />
         </>
     );

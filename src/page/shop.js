@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import CardMenu from "../asset/card-menu";
+import Map from '../asset/map.js';
 
 function Shop() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -33,7 +34,7 @@ function Shop() {
         const itemsRes = await fetch(`${apiUrl}/api/item?shopId=${shopId}`, { credentials: "include" });
         if (!itemsRes.ok) throw new Error("Failed to fetch items");
         const itemsData = await itemsRes.json();
-        setItems(itemsData);
+        setItems(itemsData.content || []);
 
         setLoading(false);
       } catch (err) {
@@ -82,7 +83,7 @@ function Shop() {
           <p>{shop.shopPhoneNumber}</p>
           <h5>영업시간</h5>
           <p>{shop.openTime} ~ {shop.closeTime}</p>
-          <img className="map-container" alt="매장 위치 지도" />
+          <Map latitude={shop.latitude} longitude={shop.longitude} />
           <h6>
             {shop.siDo} {shop.siGunGu} {shop.eupMyoenDong}
           </h6>

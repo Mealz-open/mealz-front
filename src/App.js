@@ -24,6 +24,8 @@ import Shop from './page/shop.js';
 import SaveEdit from './page/save-edit.js';
 import Register from "./page/register.js";
 import PickUp from "./page/pickup.js";
+import MyShopProfile from "./page/my-shop-profile.js";
+import AddMyShop from "./page/addmyshop.js";
 
 import GNB from './asset/gnb.js';
 import BuyItem from './asset/buy-item.js';
@@ -67,6 +69,8 @@ function App() {
       <Route path="/editmembertype" element={<TOPTitle title={'회원 유형'} />} />
       <Route path="/register" element={<TOPTitle title={'물품 등록'} />} />
       <Route path="/pickup" element={<TOPTitle title={'수령 내역 조회'} />} />
+      <Route path="/myshopprofile" element={<TOPTitle title={'매장 관리'} />} />
+      <Route path="/addmyshop" element={<TOPTitle title={'매장 추가'} />} />
     </Routes>
     
     <div className="main-contents">
@@ -90,6 +94,8 @@ function App() {
       <Route path="/editmembertype" element={<SaveEdit />} />
       <Route path="/register" element={<Register />} />
       <Route path="/pickup" element={<PickUp />} />
+      <Route path="/myshopprofile" element={<MyShopProfile />} />
+      <Route path="/addmyshop" element={<AddMyShop />} />
     </Routes>
     </div>
 
@@ -103,7 +109,7 @@ function App() {
       <Route path="/editname" element={''} />
       <Route path="/editlocation" element={''} />
       <Route path="/editmembertype" element={''} />
-      <Route path="/register" element={<RegisterItem />} />
+      <Route path="/register" element={''} />
     </Routes>
 
     <Routes>

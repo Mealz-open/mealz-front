@@ -48,13 +48,22 @@ function Profile() {
       </div>
       <div className="article">
         <div className="box-row gap10">
-          <button className="btn-fill btn-line">내 기부 내역</button>
-          <button className="btn-fill btn-line">ESG 레포트</button>
-          <button className="btn-fill btn-line">매장 프로필</button>
+          {member.memberType === "DONATOR" ? (
+            <>
+              <button className="btn-fill btn-line">내 기부 내역</button>
+              <button className="btn-fill btn-line">ESG 레포트</button>
+              <button className="btn-fill btn-line" onClick={()=>navigate(`/myshopprofile`)}>매장 프로필</button>
+            </>
+          ) : member.memberType === "BENEFICIARY" ? (
+            <>
+              <button className="btn-fill btn-line">예약내역 확인</button>
+              <button className="btn-fill btn-line">수령내역 조회</button>
+            </>
+          ) : null}
         </div>
       </div>
       <div className="article">
-        <div className="box-col gap10">
+        <div className="box-col gap5">
           <button className="btn-fill btn-line group-align-std" onClick={()=>navigate(`/editname`)}>
             이름
             <Chevron className="icon-large" style={{ transform: 'rotate(180deg)' }} />

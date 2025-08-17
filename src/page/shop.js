@@ -77,17 +77,24 @@ function Shop() {
             <li>검색 결과가 없습니다.</li>
           )}
         </div>
-        <div>
-          <h2>가게 정보</h2>
-          <h5>전화번호</h5>
-          <p>{shop.shopPhoneNumber}</p>
-          <h5>영업시간</h5>
-          <p>{shop.openTime} ~ {shop.closeTime}</p>
-          <Map latitude={shop.latitude} longitude={shop.longitude} />
-          <h6>
-            {shop.siDo} {shop.siGunGu} {shop.eupMyoenDong}
-          </h6>
-        </div>
+        <div className="box-col gap10">
+          <h2>가게 정보</h2>  
+          <div>
+            <h4>전화번호</h4>
+            <p>{shop.shopPhoneNumber}</p>
+          </div>
+          <div>
+            <h4>영업시간</h4>
+            <p>{shop.openTime} ~ {shop.closeTime}</p>
+          </div>
+          <div>
+            <h4>매장위치</h4>
+            <Map latitude={shop.latitude} longitude={shop.longitude} />
+            <h6>
+              {shop.siDo} {shop.siGunGu} {shop.eupMyoenDong}
+            </h6>
+          </div>
+          </div>
       </div>
     </div>
   );

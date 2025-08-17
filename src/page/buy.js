@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import Map from '../asset/map.js';
 import { ReactComponent as Chevron } from "../asset/icon/icon-chevron.svg";
 
 function BUY() {
   const apiUrl = process.env.REACT_APP_API_URL;
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const foodId = searchParams.get("id");
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // 신청 요청 상태 관리
+  const [requesting, setRequesting] = useState(false);
+  const [requestError, setRequestError] = useState(null);
 
   // 수량 상태 관리
   const [buyQuantity, setBuyQuantity] = useState(1);
@@ -39,7 +45,7 @@ function BUY() {
       })
       .then((data) => {
         setProduct(data);
-        // 재고보다 수량이 많아지는 경우 방지
+        // 재고보다 수량이 많을 경우 수량 조정
         if (data?.quantity && buyQuantity > data.quantity) {
           setBuyQuantity(data.quantity);
         }
@@ -50,6 +56,34 @@ function BUY() {
       })
       .finally(() => setLoading(false));
   }, [foodId]);
+
+  // === 신청하기 API 호출 함수 ===
+  const handleApply = async () => {
+    setRequestError(null);
+    setRequesting(true);
+
+    try {
+      const response = await fetch(`${apiUrl}/api/trade`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          itemId: foodId,
+          quantity: buyQuantity
+        })
+      });
+      if (!response.ok) throw new Error('신청에 실패했습니다.');
+      alert("신청이 완료되었습니다!");
+      // 이후 필요한 페이지 이동
+      // navigate("/complete"); // 원하는 URL로 교체
+    } catch (err) {
+      setRequestError(err.message || "신청 오류가 발생했습니다.");
+    } finally {
+      setRequesting(false);
+    }
+  };
 
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>{error}</div>;
@@ -104,33 +138,48 @@ function BUY() {
     <div className="article">
       <div className="box-col gap30">
         <div className="box-col gap10">
-          <Link to="/store" className="box-row group-align-left" style={{ alignItems: "center" }}>
+          <div
+            onClick={() => navigate(`/shop?id=${product.shopId}`)}
+            className="box-row group-align-left"
+            style={{ alignItems: "center" }}
+          >
             <h3>{product.shopName}</h3>
-            <Chevron className="icon-large" style={{ transform: "rotate(180deg)", width: 7, height: 14, }} />
-          </Link>
+            <Chevron className="icon-large" style={{ transform: "rotate(180deg)", width: 7, height: 14 }} />
+          </div>
           <div className="card-row">
             <div className="box-col group-align-std" style={{ width: "203px", height: "100%" }}>
-              <h3 style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", textAlign: "left", flex: "0 1 auto", }}>{product.itemName}</h3>
+              <h3 style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                textAlign: "left",
+                flex: "0 1 auto",
+              }}>{product.itemName}</h3>
               <h5>수량: {product.quantity}</h5>
               <h5>소비기한: {formattedExpiredDate}</h5>
-              <h5>수령가능시간: {formattedPickupStartTime} -{" "}{formattedPickupEndTime}</h5>
+              <h5>수령가능시간: {formattedPickupStartTime} - {formattedPickupEndTime}</h5>
             </div>
-
             {/* 수량 변경 버튼 */}
             <div className="box-row group-align-std">
-              <button className="btn-circle" onClick={() => setBuyQuantity((q) => Math.max(1, q - 1))} disabled={buyQuantity <= 1}>-</button>
+              <button
+                className="btn-circle"
+                onClick={() => setBuyQuantity((q) => Math.max(1, q - 1))}
+                disabled={buyQuantity <= 1}
+              >-</button>
               <h3>{buyQuantity}</h3>
-              <button className="btn-circle" onClick={() => setBuyQuantity((q) => Math.min(product.quantity, q + 1))} disabled={buyQuantity >= product.quantity}>+</button>
+              <button
+                className="btn-circle"
+                onClick={() => setBuyQuantity((q) => Math.min(product.quantity, q + 1))}
+                disabled={buyQuantity >= product.quantity}
+              >+</button>
             </div>
           </div>
         </div>
 
         <div className="box-col">
           <h3>
-            소비기한:
-            <br />
-            {formattedExpiredDate.replace(" ", "") + ` (남은 기한: ${remainDate}일)`}
-            <br />
+            소비기한:<br />
+            {formattedExpiredDate.replace(" ", "") + ` (남은 기한: ${remainDate}일)`}<br />
           </h3>
           <h4 style={{ color: "var(--color-monotone-3)" }}>
             ※ 소비기한이 임박했으므로 빠른 수령이 필요합니다.
@@ -139,9 +188,9 @@ function BUY() {
 
         <div className="box-col">
           <h3>위치</h3>
+          <Map latitude={product.latitude} longitude={product.longitude} />
           <p>
-            {product.siDo} {product.siGunGu} {product.eupMyoenDong}{" "}
-            {product.ri}
+            {product.siDo} {product.siGunGu} {product.eupMyoenDong} {product.ri}
           </p>
         </div>
 
@@ -149,25 +198,35 @@ function BUY() {
           <h3>수령 가능 시간:</h3>
           <p>
             {product.pickupStartTime &&
-              `${new Date(
-                product.pickupStartTime
-              ).toLocaleString("ko-KR")}`}{" "}
-            ~{" "}
+              `${new Date(product.pickupStartTime).toLocaleString("ko-KR")}`}
+          </p>
+          <p>~</p>
+          <p>
             {product.pickupEndTime &&
-              `${new Date(
-                product.pickupEndTime
-              ).toLocaleString("ko-KR")}`}
+              `${new Date(product.pickupEndTime).toLocaleString("ko-KR")}`}
           </p>
         </div>
 
         <div className="box-col">
           <h3>수령 방식:</h3>
           <p>
-            현장 수령(선착순)<br/>
-            예약 수령 가능<br/>
+            현장 수령(선착순)<br />
+            예약 수령 가능<br />
             수령 시 신분 확인 필요
           </p>
         </div>
+      </div>
+      <div>
+        <ul id="gnb-mobile">
+          <button
+            className='btn-fill btn-primary'
+            onClick={handleApply}
+            disabled={requesting}
+          >
+            {requesting ? "신청 중..." : "신청하기"}
+          </button>
+        </ul>
+        {requestError && <div style={{ color: "red" }}>{requestError}</div>}
       </div>
     </div>
   );

@@ -94,6 +94,11 @@ function Item() {
           </p>
         </div>
       </div>
+      <div>
+        <ul id="gnb-mobile">
+          <button className = 'btn-fill btn-primary' onClick={() => navigate(`/buy?id=${foodId}`)}>신청하기</button>
+        </ul>
+      </div>
     </div>
   );
 }

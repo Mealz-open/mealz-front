@@ -15,7 +15,12 @@ function Home() {
             </div>
             <NanumType />
             <Today />
-            <Map latitude={37.5665} longitude={126.978} />
+            <div className='article'>
+                <div className="article-title">
+                    <h3>전체 나눔 매장</h3>
+                </div>
+                <Map latitude={37.5665} longitude={126.978} />
+            </div>
             <Cert />
         </>
     );

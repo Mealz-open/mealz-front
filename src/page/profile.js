@@ -50,8 +50,8 @@ function Profile() {
         <div className="box-row gap10">
           {member.memberType === "DONATOR" ? (
             <>
-              <button className="btn-fill btn-line">내 기부 내역</button>
-              <button className="btn-fill btn-line">ESG 레포트</button>
+              <button className="btn-fill btn-line" onClick={()=>navigate(`/mydonate`)}>내 기부 내역</button>
+              <button className="btn-fill btn-line" onClick={()=>navigate(`/myESGReport`)}>ESG 레포트</button>
               <button className="btn-fill btn-line" onClick={()=>navigate(`/myshopprofile`)}>매장 프로필</button>
             </>
           ) : member.memberType === "BENEFICIARY" ? (

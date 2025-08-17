@@ -26,9 +26,10 @@ import Register from "./page/register.js";
 import PickUp from "./page/pickup.js";
 import MyShopProfile from "./page/my-shop-profile.js";
 import AddMyShop from "./page/addmyshop.js";
+import MyEsgReport from "./page/my-esg-repot.js";
+import MyDonate from "./page/my-donate.js";
 
 import GNB from './asset/gnb.js';
-import BuyItem from './asset/buy-item.js';
 
 function App() {
   const [searchParams] = useSearchParams();
@@ -70,6 +71,8 @@ function App() {
       <Route path="/pickup" element={<TOPTitle title={'수령 내역 조회'} />} />
       <Route path="/myshopprofile" element={<TOPTitle title={'매장 관리'} />} />
       <Route path="/addmyshop" element={<TOPTitle title={'매장 추가'} />} />
+      <Route path="/myesgreport" element={<TOPTitle title={'ESG 레포트'}/>} />
+      <Route path="/mydonate" element={<TOPTitle title={'내 기부 내역'} />} />
     </Routes>
     
     <div className="main-contents">
@@ -95,6 +98,8 @@ function App() {
       <Route path="/pickup" element={<PickUp />} />
       <Route path="/myshopprofile" element={<MyShopProfile />} />
       <Route path="/addmyshop" element={<AddMyShop />} />
+      <Route path="/myesgreport" element={<MyEsgReport />} />
+      <Route path="/mydonate" element={<MyDonate />} />
     </Routes>
     </div>
 
@@ -103,12 +108,12 @@ function App() {
       <Route path="/login" element={''} />
       <Route path="/signup" element={''} />
       <Route path="/signin" element={''} />
-      <Route path="/item" element={<BuyItem />} />
-      <Route path="/buy" element={<BuyItem />} />
       <Route path="/editname" element={''} />
       <Route path="/editlocation" element={''} />
       <Route path="/editmembertype" element={''} />
       <Route path="/register" element={''} />
+      <Route path="/buy" element={''} />
+      <Route path="/item" element={''} />
     </Routes>
 
     <Routes>

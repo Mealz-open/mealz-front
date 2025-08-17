@@ -6,9 +6,7 @@ import Cert from '../asset/certified.js';
 
 function Like() {
     return(
-        <>
-            <SearchBar />
-        </>
+        <></>
     );
 }
 

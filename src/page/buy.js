@@ -186,12 +186,10 @@ function BUY() {
           </h4>
         </div>
 
-        <div className="box-col">
+        <div className="box-col gap5">
           <h3>위치</h3>
           <Map latitude={product.latitude} longitude={product.longitude} />
-          <p>
-            {product.siDo} {product.siGunGu} {product.eupMyoenDong} {product.ri}
-          </p>
+          <p>{product.siDo} {product.siGunGu} {product.eupMyoenDong} {product.ri}</p>
         </div>
 
         <div className="box-col">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, Link, useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import Map from '../asset/map.js';
 import { ReactComponent as Chevron } from '../asset/icon/icon-chevron.svg';
 
 function Item() {
@@ -80,8 +81,9 @@ function Item() {
             ※ 소비기한이 임박했으므로 빠른 수령이 필요합니다.
           </h4>
         </div>
-        <div className='box-col'>
+        <div className='box-col gap5'>
           <h3>위치</h3>
+          <Map latitude={product.latitude} longitude={product.longitude} />
           <p>
             {product.siDo} {product.siGunGu} {product.eupMyoenDong} {product.ri}
           </p>

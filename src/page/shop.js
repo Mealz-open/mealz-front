@@ -3,6 +3,10 @@ import { useSearchParams } from "react-router-dom";
 import CardMenu from "../asset/card-menu";
 import Map from '../asset/map.js';
 
+import { ReactComponent as Gold } from '../asset/icon/icon-gold.svg';
+import { ReactComponent as Silver } from '../asset/icon/icon-silver.svg';
+import { ReactComponent as Bronze } from '../asset/icon/icon-bronze.svg';
+
 function Shop() {
   const apiUrl = process.env.REACT_APP_API_URL;
   const [searchParams] = useSearchParams();
@@ -56,7 +60,12 @@ function Shop() {
         <img src={shop.shopImageUrl} className="img-shop-large" alt={shop.shopName}/>
         <div>
           <h3 style={{color: 'var(--color-primary-1)'}}>지금까지 {shop.donateCount}번 나눔했어요!</h3>
-          <h1>{shop.shopName}</h1>
+          <div className="box-row">
+            <h1>{shop.shopName}</h1>
+            {shop.donateCount >= 30 && <Gold style={{ height: '26px' }} />}
+            {shop.donateCount >= 20 && shop.donateCount < 30 && <Silver style={{ height: '26px' }} />}
+            {shop.donateCount >= 10 && shop.donateCount < 20 && <Bronze style={{ height: '26px' }} />}
+          </div>
           <h4>매장 소개 문구</h4>
         </div>
         <div className="box-col gap10">

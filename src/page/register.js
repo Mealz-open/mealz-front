@@ -27,10 +27,7 @@ function Register() {
                 // 1. 내 정보 조회 → memberId 가져오기
                 const meRes = await fetch(`${apiBaseUrl}/api/member`, {
                     method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    },
+                    headers: {"Content-Type": "application/json"},
                     credentials: "include",
                 });
                 if (!meRes.ok) throw new Error("회원 정보 조회 실패");
@@ -40,10 +37,7 @@ function Register() {
                 // 2. 내 매장 목록 조회
                 const shopRes = await fetch(`${apiBaseUrl}/api/shop/member/${meData.memberId}`, {
                     method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    },
+                    headers: {"Content-Type": "application/json"},
                     credentials: "include",
                 });
                 if (!shopRes.ok) throw new Error("매장 목록 조회 실패");
@@ -144,23 +138,15 @@ function Register() {
                 body: formData,
             });
 
-            if (response.ok) {
-                alert('물품이 성공적으로 등록되었습니다.');
-                // 폼 초기화
-                setItemName('');
-                setQuantity(1);
-                setExpiredDate(null);
-                setPickupDate(null);
-                setStartTime(null);
-                setEndTime(null);
-                setImages([]);
-            } else {
+            if (!response.ok) {
                 const errorText = await response.text();
-                alert(`등록 실패: ${errorText}`);
+                alert(`등록 실패: ${response.status} - ${errorText}`);
+                return;
+              }
+              alert('등록 성공');
+            } catch (error) {
+              alert(`오류 발생: ${error.message}`);
             }
-        } catch (error) {
-            alert(`오류 발생: ${error.message}`);
-        }
     };
 
     return (

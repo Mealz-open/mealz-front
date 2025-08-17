@@ -1,52 +1,67 @@
-import { useNavigate } from 'react-router-dom';
-
-import { ReactComponent as Gold } from './icon/icon-gold.svg';
-import { ReactComponent as Silver } from './icon/icon-silver.svg';
-import { ReactComponent as Bronze } from './icon/icon-bronze.svg';
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import CardShop from "../asset/card-shop";
 
 function Cert() {
-    const navigate = useNavigate();
-    const handleClick = () => {
-      navigate('/certifiedstores');
-    }
-    return(
-        <div className="article">
-          <div className="article-title">
-              <h3>인증 배지 보유 매장</h3>
-              <button onClick={handleClick}><h5>더보기</h5></button>
-          </div>
-          <div className="box-col gap10">
-            <div className="card-row">
-                <div className="cert-badge">
-                    <Gold />
-                </div>
-                <div className="box-col">
-                    <h4>동네 떡볶이</h4>
-                    <div className="box-row gap5"><h5>누적 나눔 횟수</h5><h5 className="var-primary">87</h5></div>
-                </div>
-            </div>
-            <div className="card-row">
-                <div className="cert-badge">
-                    <Silver />
-                </div>
-                <div className="box-col">
-                    <h4>동네 떡볶이</h4>
-                    <div className="box-row gap5"><h5>누적 나눔 횟수</h5><h5 className="var-primary">80</h5></div>
-                </div>
-            </div>
-            <div className="card-row">
-                <div className="cert-badge">
-                    <Bronze />
-                </div>
-                <div className="box-col">
-                    <h4>동네 떡볶이</h4>
-                    <div className="box-row gap5"><h5>누적 나눔 횟수</h5><h5 className="var-primary">60</h5></div>
-                </div>
-            </div>
-          </div>
-        </div>
-    )
+  const [items, setItems] = useState([]);
+  const apiBaseUrl = process.env.REACT_APP_API_URL || "";
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/certifiedstores');
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${apiBaseUrl}/api/shop/donate?donateCount=10`, {credentials: "include", });
+
+        if (!response.ok) {throw new Error(`서버 오류: ${response.status}`);}
+
+        const data = await response.json();
+
+        setItems(data || []);
+      } catch (error) {
+        console.error("API 호출 실패", error);
+        setItems([]); // 실패 시 빈 배열 처리
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div className="article">
+      <div className="article-title">
+          <h3>인증 배지 보유 매장</h3>
+          <button onClick={handleClick}><h5>더보기</h5></button>
+      </div>
+      <div className="box-col gap10">
+        {items.length > 0 ? (
+          items.slice(0, 3).map((shop) => (
+            <CardShop
+              key={shop.shopId}
+              shopId={shop.shopId}
+              shopName={shop.shopName}
+              shopCategory={shop.shopCategory}
+              profileUrl = {shop.profileUrl}
+              siDo={shop.siDo}
+              siGunGu={shop.siGunGu}
+              eupMyoenDong={shop.eupMyoenDong}
+              ri={shop.ri}
+              longitude = {shop.longitude}
+              latitude = {shop.latitude}
+              openTime={shop.openTime}
+              closeTime={shop.closeTime}
+              donateCount = {shop.donateCount}
+            />
+          ))
+        ) : (
+          <p>매장 검색 결과가 없습니다.</p>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Cert;

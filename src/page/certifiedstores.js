@@ -43,6 +43,7 @@ function CertifiedStores() {
               latitude = {shop.latitude}
               openTime={shop.openTime}
               closeTime={shop.closeTime}
+              donateCount = {shop.donateCount}
             />
           ))
         ) : (

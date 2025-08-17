@@ -8,13 +8,12 @@ function CertifiedStores() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${apiBaseUrl}/api/shop/donate`, {credentials: "include", });
+        const response = await fetch(`${apiBaseUrl}/api/shop/donate?donateCount=10`, {credentials: "include", });
 
         if (!response.ok) {throw new Error(`서버 오류: ${response.status}`);}
 
         const data = await response.json();
 
-        // API에서 최대 30개의 업체를 반환
         setItems(data || []);
       } catch (error) {
         console.error("API 호출 실패", error);

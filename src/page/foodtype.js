@@ -29,7 +29,7 @@ function FoodType() {
           sortDirection: "DESC",
         });
 
-        const res = await fetch(`${apiUrl}/api/item?${params}`, {
+        const res = await fetch(`${apiUrl}/api/item/filter?${params}`, {
           credentials: "include",
         });
 

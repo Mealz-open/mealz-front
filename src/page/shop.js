@@ -35,7 +35,7 @@ function Shop() {
         setShop(shopData);
 
         // 해당 매장 아이템 조회
-        const itemsRes = await fetch(`${apiUrl}/api/item?shopId=${shopId}`, { credentials: "include" });
+        const itemsRes = await fetch(`${apiUrl}/api/item/filter?shopId=${shopId}`, { credentials: "include" });
         if (!itemsRes.ok) throw new Error("Failed to fetch items");
         const itemsData = await itemsRes.json();
         setItems(itemsData.content || []);

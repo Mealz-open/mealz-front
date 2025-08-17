@@ -76,8 +76,7 @@ function BUY() {
       });
       if (!response.ok) throw new Error('신청에 실패했습니다.');
       alert("신청이 완료되었습니다!");
-      // 이후 필요한 페이지 이동
-      // navigate("/complete"); // 원하는 URL로 교체
+      navigate(`/trade?id=${foodId}`)
     } catch (err) {
       setRequestError(err.message || "신청 오류가 발생했습니다.");
     } finally {

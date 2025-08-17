@@ -52,12 +52,12 @@ function Profile() {
             <>
               <button className="btn-fill btn-line" onClick={()=>navigate(`/mydonate`)}>내 기부 내역</button>
               <button className="btn-fill btn-line" onClick={()=>navigate(`/myESGReport`)}>ESG 레포트</button>
-              <button className="btn-fill btn-line" onClick={()=>navigate(`/myshopprofile`)}>매장 프로필</button>
+              <button className="btn-fill btn-line" onClick={()=>navigate(`/myshopprofile`)}>매장 관리</button>
             </>
           ) : member.memberType === "BENEFICIARY" ? (
             <>
-              <button className="btn-fill btn-line">예약내역 확인</button>
-              <button className="btn-fill btn-line">수령내역 조회</button>
+              <button className="btn-fill btn-line" onClick={()=>navigate(`/myreservation`)}>예약내역 확인</button>
+              <button className="btn-fill btn-line" onClick={()=>navigate(`/myfinishedreservation`)}>수령내역 조회</button>
             </>
           ) : null}
         </div>

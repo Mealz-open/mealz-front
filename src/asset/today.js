@@ -31,7 +31,7 @@ function Today() {
           sortDirection: "ASC",
         });
   
-        const res = await fetch(`${apiUrl}/api/item?${params}`, { credentials: "include" });
+        const res = await fetch(`${apiUrl}/api/item/filter?${params}`, { credentials: "include" });
         if (!res.ok) throw new Error('서버 통신 오류');
   
         const contentType = res.headers.get("content-type");

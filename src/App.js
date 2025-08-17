@@ -23,7 +23,9 @@ import BUY from './page/buy.js';
 import Shop from './page/shop.js';
 import SaveEdit from './page/save-edit.js';
 import Register from "./page/register.js";
-import PickUp from "./page/pickup.js";
+import Trade from "./page/trade.js";
+import MyReservation from "./page/my-reservation.js";
+import MyFinishedReservation from "./page/my-finished-reservation.js";
 import MyShopProfile from "./page/my-shop-profile.js";
 import AddMyShop from "./page/addmyshop.js";
 import MyEsgReport from "./page/my-esg-repot.js";
@@ -68,7 +70,9 @@ function App() {
       <Route path="/editlocation" element={<TOPTitle title={'위치'} />} />
       <Route path="/editmembertype" element={<TOPTitle title={'회원 유형'} />} />
       <Route path="/register" element={<TOPTitle title={'물품 등록'} />} />
-      <Route path="/pickup" element={<TOPTitle title={'수령 내역 조회'} />} />
+      <Route path="/trade" element={<TOPTitle title={'예약 물품 확인'} />} />
+      <Route path="/myreservation" element={<TOPTitle title={'예약내역 확인'} />} />
+      <Route path="/myfinishedreservation" element={<TOPTitle title={'수령내역 조회'}/>} />
       <Route path="/myshopprofile" element={<TOPTitle title={'매장 관리'} />} />
       <Route path="/addmyshop" element={<TOPTitle title={'매장 추가'} />} />
       <Route path="/myesgreport" element={<TOPTitle title={'ESG 레포트'}/>} />
@@ -95,7 +99,9 @@ function App() {
       <Route path="/editlocation" element={<SaveEdit />} />
       <Route path="/editmembertype" element={<SaveEdit />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/pickup" element={<PickUp />} />
+      <Route path="/trade" element={<Trade />} />
+      <Route path="/myreservation" element={<MyReservation />} />
+      <Route path="/myfinishedreservation" element={<MyFinishedReservation />} />
       <Route path="/myshopprofile" element={<MyShopProfile />} />
       <Route path="/addmyshop" element={<AddMyShop />} />
       <Route path="/myesgreport" element={<MyEsgReport />} />

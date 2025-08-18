@@ -57,7 +57,7 @@ function Shop() {
   return (
     <div className="article">
       <div className="box-col gap30">
-        <img src={shop.shopImageUrl} className="img-shop-large" alt={shop.shopName}/>
+        <img src={shop.shopImageUrl} className="img-shop-large"/>
         <div>
           <h3 style={{color: 'var(--color-primary-1)'}}>지금까지 {shop.donateCount}번 나눔했어요!</h3>
           <div className="box-row">

@@ -58,7 +58,7 @@ function GNB() {
             </Link>
           )}
           {memberType === "DONATOR" && (
-            <Link to="/pickup" className={`btn-gnb ${pathname === '/pickup' ? 'active' : ''}`} id="btn-pickup">
+            <Link to="/mydonate" className={`btn-gnb ${pathname === '/pickup' ? 'active' : ''}`} id="btn-pickup">
               <BookIcon className="icon-gnb" />
               <h6>수령 조회</h6>
             </Link>

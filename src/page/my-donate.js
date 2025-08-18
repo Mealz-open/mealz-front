@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import CardMenu from "../asset/card-menu.js";
+import CardTrade from "../asset/card-trade.js";
 
 function MyDonate() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -103,9 +103,9 @@ function MyDonate() {
     <div className="article">
       <div className="box-col gap10">
         {trades.map((trade) => (
-          <CardMenu
+          <CardTrade
             key={trade.tradeId}
-            itemId={trade.itemId}
+            tradeId={trade.tradeId}
             itemName={trade.itemName}
             itemImageUrls={trade.itemImageUrls && trade.itemImageUrls[0]} // 실제 응답 필드에 따라 수정
             quantity={trade.tradeQuantity}

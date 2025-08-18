@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation as usePageLocation } from "react-router-dom";
 import EditName from "../asset/edit-name";
+import EditLocation from "../asset/edit-location";
 import EditMembertype from "../asset/edit-membertype";
 
 function SaveEdit() {
   const apiUrl = process.env.REACT_APP_API_URL;
   const [nickname, setNickname] = useState("말즈 이용자");
+  const [location, setLocation] = useState("주소를 등록해주세요");
   const [memberType, setMemberType] = useState("BENEFICIARY");
   const [profileImage, setProfileImage] = useState(null);
   const navigate = useNavigate();
@@ -20,6 +22,7 @@ function SaveEdit() {
         if (res.ok) {
           const data = await res.json();
           setNickname(data.nickname || "말즈 이용자");
+          setLocation(data.location || "위치를 등록해주세요");
           setMemberType(data.memberType || "BENEFICIARY");
         }
       } catch (err) {
@@ -59,6 +62,9 @@ function SaveEdit() {
       {/* 현재 페이지 주소에 따라 다른 편집폼 표시 */}
       {pageLocation.pathname === "/editname" && (
         <EditName editNickname={nickname} setNickname={setNickname} />
+      )}
+      {pageLocation.pathname === "/editlocation" && (
+        <EditLocation editLocation={location} setLocation={setLocation} />
       )}
       {pageLocation.pathname === "/editmembertype" && (
         <EditMembertype editMembertype={memberType} setMembertype={setMemberType} />

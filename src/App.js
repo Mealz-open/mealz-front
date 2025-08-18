@@ -119,6 +119,7 @@ function App() {
       <Route path="/editmembertype" element={''} />
       <Route path="/register" element={''} />
       <Route path="/buy" element={''} />
+      <Route path="/trade" elemen={''} />
       <Route path="/item" element={''} />
     </Routes>
 

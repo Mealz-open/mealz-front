@@ -106,7 +106,7 @@ function MyReservation() {
         {trades.map((trade) => (
           <CardTrade
             key={trade.tradeId}
-            itemId={trade.itemId}
+            tradeId={trade.tradeId}
             itemName={trade.itemName}
             itemImageUrls={trade.itemImageUrls && trade.itemImageUrls[0]} // 실제 응답 필드에 따라 수정
             quantity={trade.tradeQuantity}

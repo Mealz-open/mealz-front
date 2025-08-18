@@ -63,7 +63,7 @@ function Item() {
       <div className='box-col gap30'>
         <img src={product.itemImageUrls && product.itemImageUrls[0]} className='img-product-large' alt={product.itemName}/>
         <div className='box-col gap10'>
-          <button onClick={()=>navigate(`/shop?id=${product.shopId}`)} className="box-row group-align-left" style={{alignItems: 'center'}}>
+          <button onClick={()=>navigate(`/shop?id=${product.shopId}&name=${product.shopName}`)} className="box-row group-align-left" style={{alignItems: 'center'}}>
             <h3>{product.shopName}</h3>
             <Chevron className="icon-large" style={{ transform: 'rotate(180deg)', width: 7, height: 14 }} />
           </button>

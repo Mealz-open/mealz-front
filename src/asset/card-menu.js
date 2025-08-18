@@ -26,7 +26,7 @@ function CardMenu({ itemId, itemName, itemImageUrls, quantity, expiredDate, pick
                 <h5>소비기한: {formattedExpiredDate}</h5>
                 <h5>수령가능시간: {formattedPickupStartTime} - {formattedPickupEndTime}</h5>
             </div>
-            <img src={itemImageUrls} class="img-product"/>
+            <img src={itemImageUrls[0]} class="img-product"/>
         </button>
     );
 }

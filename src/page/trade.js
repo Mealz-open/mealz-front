@@ -129,6 +129,10 @@ function Trade() {
           <h5 style={{ color: "var(--color-primary-1)" }}>매장으로 찾아와주세요</h5>
           <Map latitude={trade.latitude} longitude={trade.longitude} />
         </div>
+        <div className="box-col">
+          <h5 style={{ color: "var(--color-primary-1)" }}>수혜자 정보</h5>
+          <h3>{trade.beneficiaryNickname} ({trade.beneficiaryId})</h3>
+        </div>
       </div>
       <div>
       <ul id="gnb-mobile">

@@ -76,7 +76,7 @@ function BUY() {
       });
       if (!response.ok) throw new Error('신청에 실패했습니다.');
       alert("신청이 완료되었습니다!");
-      navigate(`/trade?id=${foodId}`)
+      navigate(`/myreservation`)
     } catch (err) {
       setRequestError(err.message || "신청 오류가 발생했습니다.");
     } finally {
